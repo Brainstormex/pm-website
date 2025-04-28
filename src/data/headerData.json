@@ -1,0 +1,86 @@
+{
+  "primaryNav": [
+    {
+      "label": "Explore Today",
+      "href": "/explore"
+    },
+    {
+      "label": "Strategy",
+      "href": "/strategy",
+      "children": [
+        {
+          "label": "Leadership",
+          "href": "/leadership"
+        },
+        {
+          "label": "Management",
+          "href": "/management"
+        },
+        {
+          "label": "Marketing",
+          "href": "/marketing"
+        },
+        {
+          "label": "Sales",
+          "href": "/sales"
+        },
+        {
+          "label": "Finance",
+          "href": "/finance"
+        },
+        {
+          "label": "Human Resources",
+          "href": "/hr"
+        }
+      ]
+    },
+    {
+      "label": "Recruitment",
+      "href": "/recruitment"
+    },
+    {
+      "label": "Performance",
+      "href": "/performance"
+    },
+    {
+      "label": "Culture",
+      "href": "/culture"
+    },
+    {
+      "label": "Tech",
+      "href": "/tech"
+    }
+  ],
+  "secondaryNav": [
+    {
+      "label": "Videos",
+      "href": "/videos"
+    },
+    {
+      "label": "Events",
+      "href": "/events"
+    },
+    {
+      "label": "Products",
+      "href": "/products"
+    },
+    {
+      "label": "pmUnplugged",
+      "href": "/unplugged"
+    }
+  ],
+  "upperNav": [
+    {
+      "label": "Subscribe",
+      "href": "/subscribe"
+    },
+    {
+      "label": "Advertise",
+      "href": "/advertise"
+    },
+    {
+      "label": "Login / Signup",
+      "href": "/auth/login"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+    "articles": [
+      {
+        "id": "1",
+        "title": "LTIMindtree appoints Venu Lambu as CEO (Designate)",
+        "category": "Appointments",
+        "author": "Jagriti Kumari",
+        "imageSrc": "/assets/images/dummy.jpg",
+        "url": "/article/ltimindtree-appoints-venu-lambu"
+      },
+      {
+        "id": "2",
+        "title": "Leading with purpose: Insights from the Bhagavad Gita for modern managers",
+        "category": "Leadership",
+        "author": "Dr. Subodh Agarwal",
+        "imageSrc": "/assets/images/dummy.jpg",
+        "url": "/article/leading-with-purpose"
+      },
+      {
+        "id": "3",
+        "title": "Artificial intelligence is reshaping HR",
+        "category": "Technology",
+        "author": "Yogita Tulsiani",
+        "imageSrc": "/assets/images/dummy.jpg",
+        "url": "/article/ai-reshaping-hr"
+      },
+      {
+        "id": "4",
+        "title": "National Girl Child Day: Empowering women through scholarships to build an equitable future",
+        "category": "Business",
+        "author": "Yogita Tulsiani",
+        "imageSrc": "/assets/images/dummy.jpg",
+        "url": "/article/national-girl-child-day"
+      }
+    ],
+    "initialFilters": {
+      "FORMAT": [
+        { "name": "Articles", "count": 48, "selected": false },
+        { "name": "Podcasts", "count": 3, "selected": false },
+        { "name": "Videos", "count": 8, "selected": false },
+        { "name": "Infographics", "count": 14, "selected": false },
+        { "name": "Research", "count": 3, "selected": false },
+        { "name": "Webinars", "count": 12, "selected": false },
+        { "name": "Case Studies", "count": 6, "selected": false },
+        { "name": "White Papers", "count": 9, "selected": false }
+      ],
+      "CATEGORIES": [
+        { "name": "Strategic HR", "count": 14, "selected": false },
+        { "name": "C-Suite", "count": 2, "selected": false },
+        { "name": "Employee Relations", "count": 1, "selected": false },
+        { "name": "Performance Mgmt", "count": 14, "selected": false },
+        { "name": "Culture", "count": 3, "selected": false },
+        { "name": "Talent Acquisition", "count": 10, "selected": false },
+        { "name": "Learning & Development", "count": 7, "selected": false },
+        { "name": "Diversity & Inclusion", "count": 5, "selected": false }
+      ]
+    }
+  }
+  

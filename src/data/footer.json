@@ -1,0 +1,97 @@
+{
+    "footerData": {
+      "headerText":"We are the definitive source of insight and innovation for the evolving world of work. We illuminate the human element in the workplace, exploring how technology, culture, and leadership are transforming the employee experience.",
+    "socialLinks": [
+      { "name": "Facebook", "url": "#" },
+      { "name": "Instagram", "url": "#" },
+      { "name": "Twitter", "url": "#" },
+      { "name": "LinkedIn", "url": "#" },
+      { "name": "YouTube", "url": "#" }
+    ],
+    "sections": [
+      {
+        "title": "Company",
+        "links": [
+          { "label": "About", "href": "#" },
+          { "label": "Careers", "href": "#" },
+          { "label": "Subscription Plans", "href": "#" },
+          { "label": "Advertise with us", "href": "#" },
+          { "label": "Become a sponsor", "href": "#" }
+        ]
+      },
+      {
+        "title": "Strategy",
+        "links": [
+          { "label": "Leadership", "href": "#" },
+          { "label": "C-Suite", "href": "#" },
+          { "label": "Strategic HR", "href": "#" },
+          { "label": "Employee Relations", "href": "#" },
+          { "label": "Big Interview", "href": "#" }
+        ]
+      },
+      {
+        "title": "Resources",
+        "links": [
+          { "label": "Leadership", "href": "#" },
+          { "label": "C-Suite", "href": "#" },
+          { "label": "Strategic HR", "href": "#" },
+          { "label": "Employee Relations", "href": "#" },
+          { "label": "Big Interview", "href": "#" }
+        ]
+      },
+
+      {
+        "title": "Perfomance",
+        "links": [
+          { "label": "Leadership", "href": "#" },
+          { "label": "C-Suite", "href": "#" },
+          { "label": "Strategic HR", "href": "#" },
+          { "label": "Employee Relations", "href": "#" },
+          { "label": "Big Interview", "href": "#" }
+        ]
+      },
+
+      {
+        "title": "Culture",
+        "links": [
+          { "label": "Leadership", "href": "#" },
+          { "label": "C-Suite", "href": "#" },
+          { "label": "Strategic HR", "href": "#" },
+          { "label": "Employee Relations", "href": "#" },
+          { "label": "Big Interview", "href": "#" }
+        ]
+      },
+
+      {
+        "title": "Tech",
+        "links": [
+          { "label": "Leadership", "href": "#" },
+          { "label": "C-Suite", "href": "#" },
+          { "label": "Strategic HR", "href": "#" },
+          { "label": "Employee Relations", "href": "#" },
+          { "label": "Big Interview", "href": "#" }
+        ]
+      }
+    ],
+    "bottomLinks": [
+      { "label": "Terms of Use", "href": "#" },
+      { "label": "Privacy Policy", "href": "#" },
+      { "label": "Get in touch", "href": "#" },
+      { "label": "Write For Us", "href": "#" }
+    ],
+    "products":[
+      { "name": "Product 1", "image": "/api/placeholder/100/100", "href": "#" },
+      { "name": "Product 2", "image": "/api/placeholder/100/100", "href": "#" },
+      { "name": "Product 3", "image": "/api/placeholder/100/100", "href": "#" }
+    ],
+    "events":[
+      { "name": "Event 1", "image": "/api/placeholder/100/100", "href": "#" },
+      { "name": "Event 2", "image": "/api/placeholder/100/100", "href": "#" },
+      { "name": "Event 3", "image": "/api/placeholder/100/100", "href": "#" },
+      { "name": "Event 4", "image": "/api/placeholder/100/100", "href": "#" },
+      { "name": "Event 5", "image": "/api/placeholder/100/100", "href": "#" }
+    ],
+    "copyright": "Copyright 2025 People Matters Media Pvt. Ltd. All rights reserved."
+  }
+}
+  
