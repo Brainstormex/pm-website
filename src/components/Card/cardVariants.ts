@@ -15,7 +15,7 @@ export const titleSizeVariants = {
   default: "",
   xsmall: "text-sm",
   small: "text-lg",
-  medium: "text-xl",
+  medium: "md:text-xl text-lg",
   large: "text-2xl",
   xlarge: "text-3xl",
   xxlarge: "text-4xl",

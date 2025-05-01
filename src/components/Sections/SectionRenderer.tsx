@@ -6,6 +6,7 @@ import { Section } from "@/types/common";
 import { TwoColumnLayout } from "./TwoColumnLayout";
 import { Article } from "@/types/article";
 import { ReverseColumnLayout } from "./ReverseColumnLayout";
+import PopupWindow from "./PopupWindow";
 // import { CurrentSectionProps } from "@/components/Sections/CurrentSection";
 
 const EmailSubscription = dynamic<{data: Section}>(
@@ -106,7 +107,7 @@ const RecentArticlesSectionDynamic = dynamic<{articles: Article[]}>(
 
 export const SectionRenderer = ({sectionsData, showLeftBorder}:{sectionsData: Section[]; border?: string; showLeftBorder?: boolean}) => {
   return (
-    <div className="flex flex-col gap-10 ">
+    <div className="flex flex-col gap-10 relative ">
       {sectionsData.map((section, index) => (
         <Suspense key={index} fallback={<div>Loading...</div>}>
           {(() => {
@@ -118,6 +119,8 @@ export const SectionRenderer = ({sectionsData, showLeftBorder}:{sectionsData: Se
                 return <FeaturedNewsSection key={index} data={section} />;
               case "ads_section":
                 return <AdsSection key={index} data={section} />;
+                case "popup_window":
+                return <PopupWindow/>;
               case "recent_appointments_section":
                 return <RecentAppointmentsSection title={section.label || ""} key={index} data={section} />;
               case "horizontal_long_section":

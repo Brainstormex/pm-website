@@ -30,14 +30,14 @@ export default function EventsListing({ data }: { data: EventData }) {
   const events = data.events && data.events.length > 0 ? data.events : eventsData;
 
   return (
-    <div className="max-w-7xl md:w-4/5 mx-auto w-full px-4 lg:px-0">
+    <div className="max-w-7xl  lg:w-4/5 mx-auto w-full px-0 md:px-4 lg:px-0 lg:pl-8 lg:border-l border-inactiveGray">
       {/* Header with title and filters */}
       <h2 className="text-xs font-Inter font-semibold mb-8 uppercase">upcoming</h2>
    
       {/* Events list */}
       <div className="space-y-10">
         {events.map((event: Event, index: number) => (
-          <div key={index} className="border-b border-borderGray pb-4">
+          <div key={index} className="border-b border-borderGray last:border-b-0 pb-4">
             <div className="flex flex-col lg:flex-row gap-4">
               {/* Date column */}
               <div className="w-full lg:w-1/4 lg:border-r border-borderGray lg:pr-4 flex flex-col justify-between">
@@ -60,16 +60,16 @@ export default function EventsListing({ data }: { data: EventData }) {
               <div className="w-full lg:w-2/4 lg:px-2 lg:border-r border-borderGray flex flex-col justify-between">
                 <div className="flex flex-col">
                   <Link href={`/events/${event.slug}`} className="">
-                    <span className="text-3xl font-medium mb-3 capitalize">{event.title}</span>
+                    <span className="text-[32px] text-inkBlack font-medium mb-3 capitalize line-clamp-1 ">{event.title}</span>
                   </Link>
                   <Link href={`/events/${event.slug}`} className="">
-                    <span className="text-gray-600 mb-6 font-Inter">{event.description || ""}</span>
+                    <span className="text-inkBlack/60 text-sm mb-6 font-inter line-clamp-4">{event.description || ""}</span>
                   </Link>
                 </div>
                 
                 <div className="flex items-center gap-x-4">
                   <Image src='/assets/people.svg' alt="People Icon" width={18} height={18} />
-                  <span className="text-sm">{event.audience || "Everyone"}</span>
+                  <span className="text-xs line-clamp-1 text-inkBlack">{event.audience || "Everyone"}</span>
                 </div>
               </div>
 
@@ -80,7 +80,7 @@ export default function EventsListing({ data }: { data: EventData }) {
                     src={event.image || '/assets/images/dummy.jpg'}
                     alt={event.title}
                     fill
-                    className="object-cover rounded-lg"
+                    className="object-cover rounded-[4px]"
                   />
                 </div>
               </div>

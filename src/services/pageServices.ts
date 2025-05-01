@@ -176,6 +176,22 @@ export const pageService = {
       return null;
     }
   },
+  getBRODataBySlug: async (slug: string, host?: string) => {
+    try {
+      console.log(pageService.getBaseUrl(host), "process.env.NEXT_PUBLIC_API_BASE_URL");
+      const response = await fetch(`${pageService.getBaseUrl(host)}/api/brand/${slug}`, {
+          next: { revalidate: revalidate } // Cache for 30 seconds
+      });
+      console.log(response, "response");
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching page data:', error);
+      return null;
+    }
+  },
+
+  
   getHotTopics: async (host?: string) => {
     try {
       console.log(pageService.getBaseUrl(host), "process.env.NEXT_PUBLIC_API_BASE_URL");

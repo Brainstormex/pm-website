@@ -33,7 +33,7 @@ export const EventsSection = ({ data }: { data: Section }) => {
    console.log(data.events,"From Events Section")
 
   return (
-    <section className="max-w-7xl mx-auto py-10 w-full px-4 lg:px-0" data-template={data.template}>
+    <section className="max-w-7xl mx-auto py-0 w-full px-4 lg:px-0" data-template={data.template}>
       <div className="flex justify-between items-start mb-0">
         <SectionHeading 
           title={data.label || "Upcoming Events"}
@@ -85,7 +85,7 @@ export const EventsSection = ({ data }: { data: Section }) => {
                   src={event.image || "/assets/image/dummy.jpg"}
                   alt={event.title}
                   fill
-                  className="object-cover rounded-lg"
+                  className="object-cover rounded-[4px]"
                 />
               </div>
 

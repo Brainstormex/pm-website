@@ -43,7 +43,7 @@ export const RecentAppointmentSection: React.FC<{
           <SectionHeading link={""} title={title} template={data.template} />
         </div>
 
-        <div className="relative pb-20">
+        <div className="relative pb-3">
           <div className="overflow-hidden">
             <Swiper
               modules={[Navigation, Pagination]}
@@ -53,7 +53,10 @@ export const RecentAppointmentSection: React.FC<{
                 prevEl: ".swiper-button-prev-custom",
                 nextEl: ".swiper-button-next-custom",
               }}
-              className="video-swiper"
+              style={{
+                paddingRight: "10rem", // Adjust the padding to account for the vertical scrollbar
+              }}
+              className="video-swiper !pr-10"
             >
               {appointmentData?.map((video, index) => (
                 <SwiperSlide key={index} className="!w-auto">
@@ -96,10 +99,10 @@ export const RecentAppointmentSection: React.FC<{
             </Swiper>
           </div>
           {/* Custom Navigation Buttons */}
-          <button className="swiper-button-prev-custom absolute left-0 bottom-0 z-10 w-10 h-10 flex items-center justify-center">
+          <button className="swiper-button-prev-custom absolute left-0 -bottom-16 -translate-y-1/2 z-10 w-10 h-10  flex items-center justify-center ">
             <ChevronLeft className="w-6 h-6 text-inkBlack" />
           </button>
-          <button className="swiper-button-next-custom absolute left-12 bottom-0 z-10 w-10 h-10 flex items-center justify-center">
+          <button className="swiper-button-next-custom absolute left-12  -bottom-16 -translate-y-1/2 z-10 w-10 h-10  flex items-center justify-center ">
             <ChevronRight className="w-6 h-6 text-inkBlack" />
           </button>
         </div>
@@ -108,9 +111,8 @@ export const RecentAppointmentSection: React.FC<{
       
       <style jsx global>{`
         .video-swiper {
-          overflow: hidden;
+          overflow: visible;
           padding: 20px 0;
-          width: 100%;
         }
         .video-swiper .swiper-wrapper {
           display: flex;
@@ -118,7 +120,6 @@ export const RecentAppointmentSection: React.FC<{
         }
         .video-swiper .swiper-slide {
           height: auto;
-          width: auto !important;
         }
         .swiper-button-prev-custom,
         .swiper-button-next-custom {
@@ -126,7 +127,7 @@ export const RecentAppointmentSection: React.FC<{
         }
         .swiper-button-prev-custom:hover,
         .swiper-button-next-custom:hover {
-          transform: scale(1.1);
+          transform: translateY(-50%) scale(1.1);
         }
         .swiper-button-disabled {
           opacity: 0.2;

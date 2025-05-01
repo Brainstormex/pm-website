@@ -95,7 +95,7 @@ const MainFooter = ({ menuItems }: { menuItems: MainMenus }) => {
         <p className="text-white text-center mb-8 max-w-3xl mx-auto">{menuItems.FooterCol1[0].label}</p>
         <SocialLinks links={menuItems.SocialMenu} />
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-8">
           {sectionsData.map((section:MenuItem[], index:number) => (
             <FooterSection
               key={`FooterSection-${index}`}
@@ -103,7 +103,25 @@ const MainFooter = ({ menuItems }: { menuItems: MainMenus }) => {
             />
           ))}
         </div>
-        
+        {/* Other Links */}
+        {menuItems.OtherLinks && (
+          <div className='flex gap-4 items-center'>
+            <div className='flex items-center gap-16 mb-8'>
+              <h3 className='text-white font-semibold'>Other Links:</h3>
+            <div className='flex gap-8'>
+              {menuItems?.OtherLinks?.map(({ label, href }) => (
+                <Link
+                  key={label}
+                  href={href || "#"}
+                  className="text-sm text-white/60 hover:text-white transition-colors"
+                >
+                  {label}
+                </Link>
+              ))}
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="border-t border-gray-800 pt-8">
           <div className="flex lg:flex-row flex-col justify-between gap-8 pb-5">

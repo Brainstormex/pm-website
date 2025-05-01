@@ -21,7 +21,7 @@ export const TwoColumnLayout = ({ data }: { data: Section }) => {
   // console.log("Right section sections:", rightSection?.sections);
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-10 w-full sm:px-6 lg:px-0" data-template={data.template}>
+    <section className="max-w-7xl mx-auto px-4 py-0  lg:py-10 w-full sm:px-6 lg:px-0" data-template={data.template}>
       <div className="flex lg:flex-row flex-col gap-8 w-full relative">
         <div className="lg:w-[70%] w-full">
           <div className="space-y-6">

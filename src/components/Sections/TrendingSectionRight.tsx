@@ -25,7 +25,8 @@ const TrendingSectionRight = ({data}: {data: Section}) => {
                 imageStyle={"circle"}
                 layout={"horizontalReverse"}
                 wantDescription={false}
-                titleSize="xsmall"
+                titleSize="medium"
+                title="medium"
                 description="small"
                 className='w-20 h-20'
                 descriptionSize="small"

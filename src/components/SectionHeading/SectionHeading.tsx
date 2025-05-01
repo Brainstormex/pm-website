@@ -32,9 +32,10 @@ interface SectionHeadingProps extends VariantProps<typeof containerVariants> {
 
 const OctopusHandpickedHeader = ({ title }: SectionHeadingProps) => {
   const titleParts = title.split(" ");
+  const isOctopusHeader = title === "Octopus Handpicked";
 
   return (
-    <div className="flex justify-between items-start bg-background pb-4 mb-5 border-b-0.5 border-border w-full">
+    <div className={`flex justify-between ${isOctopusHeader ? "items-center" : "items-start"} pb-4 mb-5 border-b-0.5 border-border w-full`}>
       <div className="flex flex-col">
         {/* Apply different font weights for "Octopus" and "Handpicked" */}
         <h2 className="text-3xl font-medium md:font-normal text-black">

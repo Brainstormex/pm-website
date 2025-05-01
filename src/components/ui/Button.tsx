@@ -10,7 +10,7 @@ const buttonVariants = cva(
         primary: "bg-orange text-background",
         secondary: "bg-indigo text-background",
         outline: "border border-orange text-background",
-        ghost: "text-gray-700",
+        ghost: "text-inkBlack border border-inkBlack",
         danger: "bg-red-500 text-white",
       },
       size: {
@@ -21,7 +21,7 @@ const buttonVariants = cva(
       hoverVariant: {
         primary: "",
         outline: "hover:bg-blue-100",
-        ghost: "hover:bg-gray-100",
+        ghost: "hover:bg-inactiveGray hover:border-0",
         danger: "hover:bg-red-600",
       },
       capitalize: {

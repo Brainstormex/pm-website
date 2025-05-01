@@ -31,6 +31,7 @@ export const PageRenderer = ({ type, data }: PageRendererProps) => {
   console.log("PageRenderer",data)
   return (
     <Suspense fallback={<div>Loading...</div>}>
+      {/* {JSON.stringify(data)} */}
       {(() => {
         switch (type) {
           case "article":

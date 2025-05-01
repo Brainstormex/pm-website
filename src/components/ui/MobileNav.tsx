@@ -1,37 +1,62 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 
 type NavItem = {
   label: string;
-  href: string;
+  href?: string;
+  value?: string;
 };
 
 interface MobileNavProps {
   items: NavItem[];
   initialSelectedItem?: string;
   className?: string;
+  label?: string;
+  placeholder?: string;
+  isOption?: boolean;
+  onSelect?: (value: string) => void;
 }
 
 const MobileNav = ({
   items,
   initialSelectedItem,
   className = "",
+  label,
+  placeholder,
+  isOption = false,
+  onSelect,
 }: MobileNavProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [selectedItem, setSelectedItem] = useState<string>(
-    initialSelectedItem || items[0]?.label || ""
+    initialSelectedItem || (placeholder ? "" : items[0]?.label || "")
   );
 
   useEffect(() => {
-    const currentItem = items.find((item) => item.href === pathname);
-    if (currentItem) {
-      setSelectedItem(currentItem.label);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isOption) {
+      const currentItem = items.find((item) => item.href === pathname);
+      if (currentItem) {
+        setSelectedItem(currentItem.label);
+      }
     }
-  }, [pathname, items]);
+  }, [pathname, items, isOption]);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -40,7 +65,12 @@ const MobileNav = ({
   const handleItemClick = (item: NavItem) => {
     setSelectedItem(item.label);
     setIsOpen(false);
-    router.push(item.href);
+    
+    if (isOption && onSelect) {
+      onSelect(item.value || item.label);
+    } else if (item.href) {
+      router.push(item.href);
+    }
   };
 
   const dropdownItems = items.filter((item) => item.label !== selectedItem);
@@ -77,7 +107,7 @@ const MobileNav = ({
     //     </div>
     //   )}
     // </div>
-    <div className={`relative w-full ${className}`}>
+    <div className={`relative w-full ${className}`} ref={dropdownRef}>
       <div
         className={`flex cursor-pointer items-center justify-between border border-gray-300 bg-white px-4 py-4 ${
           isOpen ? "rounded-t-md" : "rounded-md"
@@ -87,7 +117,12 @@ const MobileNav = ({
           className="flex items-center justify-between w-full mx-2"
           onClick={toggleDropdown}
         >
-          <span className="font-medium">{selectedItem}</span>
+          <div>
+            {label && <span className="text-borderGray">{label}</span>}
+            <span className={`font-medium ${!selectedItem && placeholder ? 'text-inactiveGray' : ''}`}>
+              {selectedItem || placeholder}
+            </span>
+          </div>
           <ChevronDown
             className={`h-5 w-5 transition-transform duration-200 ${
               isOpen ? "rotate-180" : ""

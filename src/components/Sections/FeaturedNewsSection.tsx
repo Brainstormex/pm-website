@@ -15,7 +15,7 @@ export const FeaturedNewsSection
   console.log(data, 'From Features News Section ADAT')
 
   return (
-    <section className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-0" data-template={data.template}>
+    <section className="max-w-7xl mx-auto py-6 lg:py-0 px-4 sm:px-6 lg:px-0" data-template={data.template}>
       {/* <h2 className="text-3xl font-bold mb-8">{data.title}</h2> */}
       <div className="">
         <SectionHeading title={data.label || ""} />

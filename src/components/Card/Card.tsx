@@ -53,7 +53,7 @@ export const Card = ({
           <div className="h-32 w-48 flex-shrink-0">
             <Link href={data?.link ? data?.link : "/"}>
               <Image
-                className={`object-cover ${imageVariants[imageStyle]} ${hoverVariants[hoverStyle]}`}
+                className={`object-cover rounded-[4px] ${imageVariants[imageStyle]} ${hoverVariants[hoverStyle]}`}
                 src={data?.image ? data?.image : "/assets/images/dummy.jpg"}
                 alt={data.title}
                 width={1000}
@@ -66,7 +66,7 @@ export const Card = ({
         {layout !== "horizontal" && (
           <Link className=" block" href={data?.link ? data?.link : "/"}>
             <Image
-              className={`${"h-full object-cover "} ${
+              className={`${"h-full object-cover rounded-[4px] "} ${
                 imageVariants[imageStyle]
               } ${hoverVariants[hoverStyle]}`}
               src={
@@ -121,7 +121,7 @@ export const Card = ({
               </h3>
               {data.description && (
                 <p
-                  className={`${descriptionSizeVariants[descriptionSize]} ${descriptionVariants[description]} text-white/80`}
+                  className={`${descriptionSizeVariants[descriptionSize]} ${descriptionVariants[description]} font-inter text-white/80`}
                 >
                   {data.description ? data.description : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"}
                 </p>
@@ -139,7 +139,7 @@ export const Card = ({
           }`}
         >
           <div className="flex items-center text-xs text-description font-medium !mt-2 mb-2 font-inter line-clamp-1 w-full">
-            <span className="text-inkBlack line-clamp-1 ">
+            <span className="text-inkBlack line-clamp-1 font-normal">
               <Link href={data.categorySlug ? data.categorySlug : "/"} className="">
                 {data.category ? shortenText(data.category,14) : "Not Available"}
                 {/* {data.category ? data.category : "Not Available"} */}
@@ -161,7 +161,7 @@ export const Card = ({
             {data.title ? data.title : "Not  Available"}
           </h3>
             <p
-              className={`${descriptionSizeVariants[descriptionSize]} ${descriptionVariants[description]} text-inkBlack/60 line-clamp-2`}
+              className={`${descriptionSizeVariants[descriptionSize]} ${descriptionVariants[description]} font-inter text-inkBlack/60 line-clamp-2`}
             >
                 {data.description ? data.description : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"}
             </p>

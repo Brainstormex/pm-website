@@ -89,6 +89,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         { label: "Twitter", href: "https://twitter.com/company", icon: "twitter" },
         { label: "Facebook", href: "https://facebook.com/company", icon: "facebook" },
         { label: "LinkedIn", href: "https://linkedin.com/company", icon: "linkedin" }
+      ],
+      OtherLinks: [
+        { label: "Print Magazine", href: "/magazine" },
+        { label: "Sponsored", href: "/sponsored" },
+        { label: "Gallery", href: "/gallery" },
+        { label: "Blogs", href: "/blogs" },
+        { label: "Authors", href: "/authors" }
       ]
     };
   };
@@ -96,9 +103,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   if(!menus) return null;
 
   return (
-    <div className="flex flex-col min-h-screen">
-      {showHeader && <Header menuItems={menus} />}
-      <main className="">{children}</main>
+    <div className="min-h-screen h-screen relative">
+        {showHeader && <Header menuItems={menus} />}
+        <main className="">{children}</main>
       {showFooter && <Footer menuItems={menus} />}
     </div>
   );

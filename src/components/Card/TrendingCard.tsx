@@ -132,7 +132,7 @@ export const TrendingCard = ({
       <div
         className={`${twMerge(
           cardVariants({ layout, hoverStyle })
-        )} justify-start border-b-0.5 border-border last:border-b-0 w-full lg:py-0 py-4`}
+        )} justify-start border-b-0.5 border-border last:border-b-0.5 w-full lg:py-0 py-4`}
       >
         {/* Render image if imageUrl is provided */}
         <div className="relative">

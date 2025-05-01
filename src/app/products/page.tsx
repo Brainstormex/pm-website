@@ -68,7 +68,7 @@ const ProductListingPage = () => {
               innovations and make faster, more informed decisions.
             </p>
 
-            <div className="italic text-inkBlack text-3xl font-light">
+            <div className="italic text-inkBlack font-fraunces text-3xl font-light">
               <p className="mb-4">
                 With the launch of Octopus, we are taking the next step in a
                 journey to address a critical gap in the ecosystem: the need for

@@ -39,7 +39,7 @@ import { Section } from "@/types/common";
   return (
     <div className={`${showLeftBorder ? 'lg:border-l lg:pl-8 lg:border-border' : 'lg:border-r lg:pr-8 lg:border-border'}`} data-template={data.template}>
       <div className="flex flex-col w-full gap-4">
-        <SectionHeading title={data?.label || ""} />
+        <SectionHeading title={data?.label || ""} link={data?.link || ""}  />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 w-full col-span-2 gap-4 md:gap-6">
         {data.articles?.slice(0, 2).map((article, artIndex) => (
@@ -62,7 +62,7 @@ import { Section } from "@/types/common";
             <Card
               data={article}
               hoverStyle="hoverZoom"
-              imageStyle={"rounded"}
+              imageStyle={"default"}
               layout={"vertical"}
               titleSize="small"
               description="small"

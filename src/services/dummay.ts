@@ -126,7 +126,8 @@ export const articleData: Article[] = [
       image: "/assets/images/13.webp",
       link: "/events/techhr-pulse-mumbai",
       slug: "techhr-pulse-mumbai",
-      year: 2025
+      year: 2025,
+      type: "event"
     },
     {
       date:22,
@@ -141,6 +142,7 @@ export const articleData: Article[] = [
       image: "/assets/images/13.webp",
       link: "/events/talent-code-gcc",
       slug: "talent-code-for-gcc",
-      year: 2025
+      year: 2025,
+      type: "event"
     }
   ];

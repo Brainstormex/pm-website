@@ -35,6 +35,7 @@ type Event = {
   gallery?: GalleryImage[];
   overview?: string;
   quote?: string;
+  slug?: string;
 };
 
 // Sort options type
@@ -91,8 +92,9 @@ const EventCard = ({
   onClick: () => void;
 }) => {
   return (
-    <div
-      className={`border-b py-4 cursor-pointer ${
+    <Link
+      href={`/events/${event.slug}`}
+      className={`border-b w-full inline-block border-border py-4 cursor-pointer ${
         isActive ? "text-orange border-orange " : ""
       }`}
       onClick={onClick}
@@ -103,7 +105,7 @@ const EventCard = ({
         <span>|</span>
         <span className="text-sm font-medium">{event.date}</span>
       </div>
-    </div>
+    </Link>
   );
 };
 
@@ -574,15 +576,15 @@ const EventsPage = () => {
       <div className="flex">
         {/* Left sidebar with events list */}
         <div className="w-1/4 border-r">
-          <div className="pr-6">
+          <div className="pr-8">
             <h1 className="text-sm font-medium mb-2">UPCOMING</h1>
 
-            <div className="divide-y">
+            <div className="">
               {events.map((event) => (
                 <EventCard
-                  key={event.id}
+                  key={event.slug}
                   event={event}
-                  isActive={selectedEvent?.id === event.id}
+                  isActive={selectedEvent?.slug === event.slug}
                   onClick={() => setSelectedEvent(event)}
                 />
               ))}

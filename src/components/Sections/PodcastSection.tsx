@@ -19,7 +19,7 @@ export const PodcastSection = ({ data }: { data: Section }) => {
     <section className="max-w-7xl mx-auto lg:px-0 px-4 flex justify-between w-full flex-row gap-x-16" data-template={data.template}>
       {/* Header */}
       <div className="flex justify-between w-full items-start flex-col border-t border-border pt-0 ">
-        <div className="space-y-0 flex flex-row justify-between w-full items-start">
+        <div className="flex flex-row justify-between w-full items-start">
         <div className="">
           {/* <div className="inline-block">
             <h4 className="lg:text-lg uppercase tracking-widest font-medium text-center mb-8  bg-foreground text-white px-4 py-2 rounded-b-lg">
@@ -57,7 +57,7 @@ export const PodcastSection = ({ data }: { data: Section }) => {
                   src={podcast.image ? podcast.image : "/assets/images/dummy.jpg"}
                   alt={podcast.title}
 fill
-                  className="object-cover rounded-lg "
+                  className="object-cover rounded-[4px] "
                 />
                 </Link>
                 <div className="absolute inset-0 bg-black/30 rounded-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">

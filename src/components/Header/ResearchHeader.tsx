@@ -1,4 +1,6 @@
 'use client'
+import { pageService } from '@/services/pageServices';
+import { SubCategory } from '@/types/common';
 import React, { useState, useRef, useEffect } from 'react';
 
 interface FilterOption {
@@ -26,12 +28,12 @@ interface ResearchPageProps {
 }
 
 const ResearchHeader: React.FC<ResearchPageProps> = ({
-  title = 'Research',
-  filterTags = [
-    { id: 'SHRA', label: 'SHRA' },
-    { id: 'PMI', label: 'People Matters Initiative' },
-    { id: 'CB', label: 'Co-Branded' }
-  ],
+  // title = 'Research',
+  // filterTags = [
+  //   { id: 'SHRA', label: 'SHRA' },
+  //   { id: 'PMI', label: 'People Matters Initiative' },
+  //   { id: 'CB', label: 'Co-Branded' }
+  // ],
   showingOptions = [
     { value: 'all', label: 'All' },
     { value: 'reports', label: 'Reports' },
@@ -50,7 +52,7 @@ const ResearchHeader: React.FC<ResearchPageProps> = ({
   onFilterChange = () => {},
   onShowingChange = () => {},
   onSortByChange = () => {},
-  children
+  
 }) => {
   // State for tracking filters and dropdown selections
   const [showingFilter, setShowingFilter] = useState(defaultShowingOption);
@@ -113,11 +115,34 @@ const ResearchHeader: React.FC<ResearchPageProps> = ({
     };
   }, []);
 
+
+  const [sbTitle] = useState("Research");
+  const [sbFilterData,setSbFilterData] = useState([]);
+
+  const [loading,setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // setLoading(true);
+      const data = await pageService.getSubCategory("research");
+      console.log(data.data,"datasetSbFilterData");
+      setSbFilterData(data.data.subCategories);
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+
+  if(loading){
+    return <div>Loading...</div>
+  }
+
+  // const categoryData = await pageService.getSubCategory( "research",host);
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
         <h1 className="text-5xl font-bold mb-6 md:mb-0">
-          {title}<span className="text-orange">.</span>
+          {sbTitle}<span className="text-orange">.</span>
         </h1>
         
         <div className="flex flex-col sm:flex-row gap-4">
@@ -180,88 +205,22 @@ const ResearchHeader: React.FC<ResearchPageProps> = ({
       </div>
 
       <div className="flex flex-wrap gap-3 mb-8">
-        {filterTags.map((tag) => (
+        {sbFilterData.map((tag:SubCategory) => (
           <button
-            key={tag.id}
+            key={tag.category_id}
             className={`px-4 py-2 rounded-full border ${
-              activeFilters.includes(tag.id)
+              activeFilters.includes(tag.category_id)
                 ? 'bg-gray-800 text-white'
                 : 'bg-white text-gray-800 border-borderGray'
             } transition-colors `}
-            onClick={() => toggleFilter(tag.id)}
+            onClick={() => toggleFilter(tag.category_id)}
           >
-            {tag.label}
+            {tag.name}
           </button>
         ))}
       </div>
-
-      {/* <div className="min-h-[300px] border-t border-gray-200 pt-8">
-        {children || (
-          <div className="flex items-center justify-center text-gray-500 h-32">
-            Research content would be displayed here based on the selected filters.
-          </div>
-        )}
-      </div> */}
     </div>
   );
 };
 
-export default ResearchHeader;
-
-
-// How to Use
-// 1. Import the ResearchHeader component
-//   const researchItems = [
-//     { id: '1', title: 'The Future of Work', type: 'report', tags: ['SHRA', 'PMI'] },
-//     { id: '2', title: 'Sustainability Practices', type: 'article', tags: ['CB'] },
-//     { id: '3', title: 'Leadership in Digital Age', type: 'case_study', tags: ['PMI'] }
-//   ];
-
-//   // Filter options
-//   const filterTags = [
-//     { id: 'SHRA', label: 'SHRA' },
-//     { id: 'PMI', label: 'People Matters Initiative' },
-//     { id: 'CB', label: 'Co-Branded' }
-//   ];
-
-//   // Dropdown options
-//   const showingOptions = [
-//     { value: 'all', label: 'All' },
-//     { value: 'report', label: 'Reports' },
-//     { value: 'article', label: 'Articles' },
-//     { value: 'case_study', label: 'Case Studies' }
-//   ];
-
-//   const sortByOptions = [
-//     { value: 'relevance', label: 'Relevance' },
-//     { value: 'date', label: 'Date' },
-//     { value: 'title', label: 'Title' },
-//     { value: 'author', label: 'Author' }
-//   ];
-
-//   // State handlers (you would implement these based on your needs)
-//   const handleFilterChange = (filters: string[]) => {
-//     console.log('Active filters:', filters);
-//     // Filter your research items based on these filters
-//   };
-
-//   const handleShowingChange = (option: string) => {
-//     console.log('Showing:', option);
-//     // Filter your research items based on type
-//   };
-
-//   const handleSortByChange = (option: string) => {
-//     console.log('Sort by:', option);
-//     // Sort your research items
-//   };
-
-{/* <ResearchHeader
-title="Research"
-filterTags={filterTags}
-showingOptions={showingOptions}
-sortByOptions={sortByOptions}
-defaultActiveFilters={['SHRA']}
-onFilterChange={handleFilterChange}
-onShowingChange={handleShowingChange}
-onSortByChange={handleSortByChange}
-> */}
+export default ResearchHeader;  

@@ -13,16 +13,28 @@ export const BrandInitiativesSection = ({ data }: { data: Section }) => {
    }
 
   return (
-    <section className="max-w-7xl mx-auto py-10 w-full px-4 lg:px-0" data-template={data.template}>
+    <section className="max-w-7xl mx-auto py-0 w-full px-4 lg:px-0" data-template={data.template}>
       {/* Header */}
       <div className="flex justify-between items-start  pt-0">
-       <SectionHeading title={data.label || ""} link={data?.link || ""} buttontext="GET IN TOUCH" />
+       <SectionHeading title={data.label || ""} link={data?.link || ""} buttontext={data?.buttontext ||  "GET IN TOUCH"} />
        
       </div>
+      <div className="flex flex-row justify-between w-full items-end ">
+<div>
+
           <h2 className="text-4xl font-medium">{data.heading}</h2>
           <p className="text-gray-600 max-w-lg ">
             {data.description}
           </p>
+</div>
+
+{/* As of now there is no flag for such button so thats why adding this temp solution otherwise a flag must be passed to handle the View all with link and text */}
+{data.heading === "Brand Initiatives" &&
+<div>
+  <button className="bg-black px-16 uppercase text-sm text-white py-3 rounded-[4px]">View All</button>
+</div>
+}
+      </div>
 
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
@@ -64,14 +76,14 @@ export const BrandInitiativesSection = ({ data }: { data: Section }) => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-8 ">
         <div className="lg:border-r border-border lg:pr-7 ">
         {initiatives.slice(3,6).map((item, index) => (
-          <div key={index} className="flex items-start gap-4 group cursor-pointer pb-4 border-b border-border last:border-b-0 border-r-0 border-t-0 border-l-0  pt-6">
+          <div key={index} className="flex items-start gap-4 group cursor-pointer pb-4 border-b border-border lg:last:border-b-0 border-r-0 border-t-0 border-l-0  pt-6">
             <div className="relative w-28 lg:w-48 h-28 flex-shrink-0">
               <Link href={item.link || "#"}>
               <Image
                 src={item.image}
                 alt={item.title}
                 fill
-                className="object-cover rounded-lg"
+                className="object-cover rounded-[4px]"
                 />
                 </Link>
             </div>
@@ -93,14 +105,14 @@ export const BrandInitiativesSection = ({ data }: { data: Section }) => {
         <div>
 
         {initiatives.slice(6,9).map((item, index) => (
-          <div key={index} className="flex items-start gap-4 group cursor-pointer border-b last:border-b-0 border-r-0 border-t-0 border-l-0  pt-6 pb-4">
+          <div key={index} className="flex items-start gap-4 group cursor-pointer border-b border-border last:border-b-0 border-r-0 border-t-0 border-l-0  pt-6 pb-4">
             <div className="relative w-28 lg:w-48 h-28 flex-shrink-0">
               <Link href={item.link || "#"}>  
               <Image
                 src={item.image}
                 alt={item.title}
                 fill
-                className="object-cover rounded-lg"
+                className="object-cover rounded-[4px]"
                 />
                 </Link>
             </div>

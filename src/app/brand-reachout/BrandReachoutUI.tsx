@@ -25,7 +25,6 @@ export default function BrandReachoutPage({data}:{data:Section[]}) {
 
   return (
     <div className='max-w-7xl w-full mx-auto py-8'>
-        {/* {JSON.stringify(pageData)} */}
         <BrandReachout1 data={pageData as BrandReachout} />
         <PageRenderer data={data} type='section'   />
     </div>

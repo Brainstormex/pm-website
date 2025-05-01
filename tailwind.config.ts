@@ -20,16 +20,21 @@ export default {
         newsletterBackground: "var(--newsletterBackground)",
         inkBlack: "rgb(var(--ink-black) / <alpha-value>)",
         inactiveGray: "var(--inactive-gray)",
-        primaryBlack:"var(--primaryBlack)"
+        primaryBlack:"var(--primaryBlack)",
+        inactiveGray2:"var(--inactive-grayy)"
       },
       fontFamily: {
         custom: ["var(--font-custom)", "sans-serif"],
         sans: ["var(--font-custom)", "system-ui", "sans-serif"],
         inter: ["var(--font-inter)", "sans-serif"],
-        fraunces:['var(--font-fraunces)',"sans-serif"]
+        fraunces:['var(--font-fraunces)',"sans-serif"],
+      
       },
       borderWidth: {
         "0.5": "0.5px",
+      },
+      width: {
+        'without-scrollbar': 'calc(100vw - (100vw - 100%))',
       },
     },
   },

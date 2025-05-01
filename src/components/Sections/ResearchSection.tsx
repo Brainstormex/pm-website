@@ -12,20 +12,19 @@ export const ResearchSection = ({ data }: { data: Section }) => {
   }
   // console.log(articles,"from research section")
   const featuredArticle = articles[0];
-  // const featuredArticle = articles.find(article => article.featured);
-  // const sideArticles = articles.filter(article => !article.featured);
   const sideArticles = articles.slice(1, 5);
 
   return (
-    <section className="max-w-7xl mx-auto lg:px-0 px-4 py-10" data-template={data.template}>
+    <section className="max-w-7xl mx-auto lg:px-0 px-4 lg:py-0" data-template={data.template}>
       {/* Header */}
+      {/* {JSON.stringify(data)} */}
       <div className="flex justify-between items-start  pt-0">
         <SectionHeading title={data.label || ""} link={data.link || ""} />
       </div>
       <div className="flex flex-col gap-y-4">
-        {data.title && (
+        {data.heading && (
           <h2 className="text-4xl text-foreground font-medium">
-            {data?.title}
+            {data?.heading}
           </h2>
         )}
         {data.description && (
@@ -86,7 +85,7 @@ export const ResearchSection = ({ data }: { data: Section }) => {
                   src={article.image}
                   alt={article.title}
                   fill
-                  className="object-cover rounded-lg"
+                  className="object-cover rounded-[4px]"
                 />
                 </Link>
               </div>

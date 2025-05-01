@@ -2,35 +2,45 @@ import React, { useEffect, useRef, useState } from "react";
 import MainHeader from "./MainHeader";
 import { MainMenus } from "@/types/common";
 import StickyHeader from "./StickyHeader";
-// import { usePathname } from "next/navigation";
 
 const Header = ({ type = "main", menuItems }: { type?: string; menuItems: MainMenus }) => {
-
-  const [isScroll, setIsScroll] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
   const headerRef = useRef<HTMLDivElement | null>(null);
-  console.log(menuItems);
 
   useEffect(() => {
-    const handleScroll = () => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsSticky(!entry.isIntersecting);
+      },
+      {
+        root: null,
+        threshold: 0, // Trigger when even a bit of the header goes out of view
+      }
+    );
+
+    if (headerRef.current) {
+      observer.observe(headerRef.current);
+    }
+
+    return () => {
       if (headerRef.current) {
-        const scrollThreshold = headerRef.current.offsetHeight;
-        setIsScroll(window.scrollY > scrollThreshold);
+        observer.unobserve(headerRef.current);
       }
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   if (type === "main") {
-
     return (
-      <div className="">
+      <>
         <div ref={headerRef}>
           <MainHeader items={menuItems} />
         </div>
-        <StickyHeader items={menuItems} isScroll={isScroll} />
-      </div>
+        <StickyHeader items={menuItems} isScroll={isSticky} />
+      </>
     );
   }
+
+  return null; // handle other types if needed
 };
+
 export default Header;

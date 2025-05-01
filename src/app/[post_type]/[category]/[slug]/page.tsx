@@ -133,6 +133,7 @@ export default function ArticlePage() {
     articles: [],
     description: "",
     image: "",
+     buttontext:""
   });
   const [relatedArticle, setRelatedArticle] = useState<Section>({
     label: "",

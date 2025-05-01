@@ -21,6 +21,7 @@
   --ink-black: 18 18 18;
   --inactive-gray: #A0A0A0;
   --primaryBlack:#121212;
+  --inactive-grayy:#D0D0D0
   
   /* Custom font variable */
   --font-custom: var(--font-circular-std);
@@ -55,6 +56,13 @@ scrollbar-width: none;  /* Firefox */
   max-height: calc(100vh - 10rem); /* 4rem = 16px * 4 = 64px, adjust based on your top-16 */
 }
 
+.box-shadow-orange {
+  box-shadow: -2px 10px 19px -9px rgba(241,124,6,0.75);
+  -webkit-box-shadow: -2px 10px 19px -9px rgba(241,124,6,0.75);
+  -moz-box-shadow: -2px 10px 19px -9px rgba(241,124,6,0.75);
+  
+}
+
 
 /* @media (prefers-color-scheme: dark) {
   :root {
@@ -77,8 +85,7 @@ scrollbar-width: none;  /* Firefox */
 }
 
 
-/* Remove conflicting swiper styles */
-/* .video-swiper {
+.video-swiper {
   overflow: visible;
   padding: 20px 0;
 }
@@ -101,4 +108,4 @@ scrollbar-width: none;  /* Firefox */
   color: #717171;
   opacity: 0.2;
   cursor: not-allowed;
-} */
+}

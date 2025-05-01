@@ -139,7 +139,7 @@ const ArticlePreview: React.FC<ArticlePreviewProps> = ({ data }) => {
             src={data?.hero_image || ""}
             alt="Article cover image showing two people in business attire in a hot air balloon basket with chains"
             fill
-            className="object-cover rounded-lg"
+            className="object-cover rounded-[4px]"
             priority
           />
         )}

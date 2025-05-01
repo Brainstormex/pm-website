@@ -28,6 +28,7 @@ export interface Article {
 export interface Section {
   startDate?:string;
   heading?: string;
+  buttontext?:string;
   title?: string;
   label?: string;
   type: string;
@@ -86,6 +87,7 @@ export interface PageProps {
     category?: string;
     sub_category?: string;
     post_type?: string;
+    brand_slug?: string;
   }>;
 }
 
@@ -145,6 +147,40 @@ export interface TopicRendererProps {
   data?: Article[];
 }
 
+export interface Speaker {
+  id: string;
+  name: string;
+  email: string;
+  linkedIn?: string;
+  imageUrl?: string;
+};
+
+export interface Audience {
+  title: string;
+  description: string;
+  attendees: string[];
+};
+
+export interface WhoShouldAttend {
+  description: string;
+  title: string;
+  reasons: string[];
+}
+
+export interface Agenda {
+  description: string;
+  title: string;
+  reason: string[];
+}
+
+export interface GalleryImage {
+  src: string;
+  alt: string;
+
+}
+
+
+
 export interface Event {
   slug: string;
   id?: string;
@@ -159,10 +195,18 @@ export interface Event {
   days: string | undefined;
   location: string;
   audience: string;
+  audiences?: Audience[];
   year: number;
   // Support both single image or array of images
   image?: string;
   images?: string[];
+  gallery?: GalleryImage[];
+  type: string;
+  quote?: string;
+  speakers?: Speaker[];
+  keyInsights?: string[];
+  whoShouldAttend?: WhoShouldAttend;
+  agenda?: Agenda[];
   // Add any other properties your events have
 }
 export interface BrandInitiative {
@@ -231,6 +275,7 @@ export interface MainMenus {
   SocialMenu: MenuItem[];
   HeaderRight: MenuItem[];
   HeaderLeft: MenuItem[];
+  OtherLinks: MenuItem[];
 }
 
 export interface HotTopic {
@@ -420,5 +465,11 @@ export interface Brand {
   id: string;
   name: string;
   image: string;
+  slug: string;
+}
+
+export interface SubCategory {
+  category_id: string;
+  name: string;
   slug: string;
 }

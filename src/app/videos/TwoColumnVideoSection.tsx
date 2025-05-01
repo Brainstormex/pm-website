@@ -90,6 +90,7 @@ export const TwoColumnVideoSection = ({
                       hoverStyle="hoverZoom"
                       imageStyle="rounded"
                       titleSize="medium"
+                      title="medium"
                       layout="vertical"
                       description="small"
                       descriptionSize="small"

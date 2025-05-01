@@ -24,7 +24,7 @@ export const shortenText = (text: string, maxLength: number): string => {
     const endDay = dayMap[days[1].trim() as keyof typeof dayMap];
   
     // Return the formatted range string
-    return `${startDay}-${endDay}`;
+    return `${startDay}, ${endDay}`;
   }
   
   export const convertTimeRange = (input: string): string => {

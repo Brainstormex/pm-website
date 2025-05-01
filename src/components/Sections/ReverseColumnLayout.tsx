@@ -9,7 +9,7 @@ export const ReverseColumnLayout = ({ data }: { data: Section }) => {
   console.log("Right section sections:", data.sections[1]?.sections);
 
   return (
-    <section className="max-w-7xl mx-auto  py-6 lg:py-10 w-full" data-template={data.template}>
+    <section className="max-w-7xl mx-auto  lg:pt-10 lg:pb-0 pt-0 pb-6 w-full" data-template={data.template}>
       <div className="flex lg:flex-row flex-col gap-8 w-full relative">
         <div className="lg:w-[30%] w-full lg:px-0 px-4">
           <div className="space-y-6">
