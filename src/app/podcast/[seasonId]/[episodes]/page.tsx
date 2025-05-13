@@ -10,6 +10,10 @@ import { TrendingCard } from "@/components/Card/TrendingCard";
 import SectionHeading from "@/components/SectionHeading/SectionHeading";
 import { fetchPodcasts } from "@/services/podcastService";
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 const PodcastEpisodePage = async ({
   params,
 }: {
