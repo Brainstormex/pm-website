@@ -14,23 +14,42 @@ interface PodcastData {
 }
 
 export const fetchPodcasts = async (): Promise<PodcastResponse> => {
+  // Add immediate logging to see if function is called
+  console.warn('fetchPodcasts called', {
+    timestamp: new Date().toISOString(),
+    env: process.env.NODE_ENV,
+    apiBaseUrl: process.env.NEXT_PUBLIC_API_BASE_URL
+  });
+
   const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/podcast`;
-  console.log('Fetching podcasts from:', apiUrl); // Debug log
+  
+  // Use console.warn instead of console.log to prevent stripping
+  console.warn('About to fetch podcasts from:', apiUrl);
 
   try {
+    // Log before fetch
+    console.warn('Initiating fetch request...');
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
     const response = await fetch(apiUrl, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      // Add cache control to prevent caching
       cache: 'no-store',
-    });
+      signal: controller.signal
+    }).finally(() => clearTimeout(timeoutId));
     
-    console.log('API Response status:', {
+    // Log immediately after fetch
+    console.warn('Fetch completed, checking response...');
+
+    console.warn('API Response status:', {
       status: response.status,
       statusText: response.statusText,
-      headers: Object.fromEntries(response.headers.entries())
+      headers: Object.fromEntries(response.headers.entries()),
+      url: response.url
     });
 
     if (!response.ok) {
@@ -43,8 +62,15 @@ export const fetchPodcasts = async (): Promise<PodcastResponse> => {
       throw new Error(`Podcast API error: ${response.status} ${response.statusText}`);
     }
 
+    // Log before parsing JSON
+    console.warn('Parsing response JSON...');
+
     const data = await response.json();
-    console.log('Podcast API response data:', {
+
+    // Log after parsing JSON
+    console.warn('JSON parsed successfully');
+
+    console.warn('Podcast API response data:', {
       success: data.success,
       statusCode: data.statusCode,
       message: data.message,
@@ -72,13 +98,23 @@ export const fetchPodcasts = async (): Promise<PodcastResponse> => {
 
     return data;
   } catch (error: any) {
-    console.error("Error fetching podcasts:", {
-      error,
+    // Enhanced error logging
+    console.error("Error in fetchPodcasts:", {
+      name: error?.name,
+      message: error?.message || 'Unknown error',
+      stack: error?.stack,
+      type: error?.constructor?.name,
+      isAbortError: error?.name === 'AbortError',
       apiUrl,
       env: process.env.NEXT_PUBLIC_API_BASE_URL,
-      errorMessage: error?.message || 'Unknown error',
-      errorStack: error?.stack
+      timestamp: new Date().toISOString()
     });
+
+    // If it's an abort error, provide a more specific message
+    if (error?.name === 'AbortError') {
+      throw new Error('Podcast API request timed out after 10 seconds');
+    }
+
     throw error;
   }
 };
