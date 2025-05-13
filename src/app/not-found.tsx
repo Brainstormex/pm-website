@@ -1,5 +1,5 @@
 import Link from 'next/link'
-// import BlockStackingGame from '@/components/block-game/block-stacking-game'
+
 export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -16,7 +16,6 @@ export default function NotFound() {
           Return Home
         </Link>
       </div>
-      {/* <BlockStackingGame /> */}
     </div>
   )
 } 

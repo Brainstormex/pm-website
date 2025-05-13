@@ -14,9 +14,11 @@ export const PremiumContentSection = ({ data }: { data: Section }) => {
     <section className="max-w-7xl mx-auto px-4 lg:px-0 py-12">
       {/* Premium Content Header */}
         <div className=" text-white inline-block  rounded mb-4">
+        {data?.label &&
           <h4 className="lg:text-lg bg-orange px-4 tracking-widest font-medium text-center mb-2 lg:text-left  text-white  py-2 rounded-b-lg uppercase">
    {data.label}
           </h4>
+          }
         </div>
       <div className="mb-0 flex flex-col lg:flex-row justify-between lg:gap-y-0 gap-y-4 items-start lg:items-end">
      <div>
@@ -45,10 +47,10 @@ export const PremiumContentSection = ({ data }: { data: Section }) => {
       </div>
 
       {/* Premium Articles Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+      <div className="flex flex-row overflow-x-auto hide-scrollbar gap-8 mt-12">
         {articles.slice(0, 3).map((article, index) => (
-          <div key={index} className="group cursor-pointer">
-            <div className="relative">
+          <div key={index} className="group cursor-pointer snap-start scroll-ml-4">
+            <div className="relative w-72 md:w-[400px]">
               {/* Premium Badge */}
               <div className="absolute -top-[0.8px]  left-0 z-10">
                 <span className="bg-orange text-white tracking-widest font-semibold rounded-b-md px-6 py-1 text-sm rounded">

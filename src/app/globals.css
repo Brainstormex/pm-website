@@ -1,22 +1,20 @@
-@import 'swiper/css';
-@import 'swiper/css/navigation';
-@import 'swiper/css/pagination';
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-
 :root {
   --background: 255 255 255;
   --border: rgba(18, 18, 18, 0.4);
   --foreground: #171717;
-  --indigo: #0D121E;
-  --orange: #F17C06;
-  --light-orange: #f8e6d0;
+  --indigo: #0d121e;
+  --orange: 241 124 6;
+  --light-orange: 241 124 6;
   --description: #717171;
-  --border-gray:#A0A0A0;
+  --border-gray: #a0a0a0;
   --newsletterBackground: #fdf3e6;
   --ink-black: 18 18 18;
   --inactive-gray: #A0A0A0;
@@ -32,12 +30,11 @@
   font-family: var(--font-custom);
 }
 
-
-body, html {
-  overflow-x: hidden;  /* Prevent horizontal scrolling */
+body,
+html {
+  overflow-x: hidden; /* Prevent horizontal scrolling */
   font-family: var(--font-custom), system-ui, sans-serif;
 }
-
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .hide-scrollbar::-webkit-scrollbar {
@@ -46,14 +43,16 @@ body, html {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .hide-scrollbar {
--ms-overflow-style: none;  /* IE and Edge */
-scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 /* In your global.css or component CSS */
 .combined_section_right {
   position: sticky;
   align-self: flex-start;
-  max-height: calc(100vh - 10rem); /* 4rem = 16px * 4 = 64px, adjust based on your top-16 */
+  max-height: calc(
+    100vh - 10rem
+  ); /* 4rem = 16px * 4 = 64px, adjust based on your top-16 */
 }
 
 .box-shadow-orange {
@@ -77,13 +76,11 @@ scrollbar-width: none;  /* Firefox */
   font-family: Arial, Helvetica, sans-serif;
 } */
 
-
 /* Make sure this is in your global CSS file */
 .combined_section_right {
   max-height: calc(100vh + 900px); /* Adjust based on your layout */
   overflow-y: auto;
 }
-
 
 .video-swiper {
   overflow: visible;
@@ -108,4 +105,17 @@ scrollbar-width: none;  /* Firefox */
   color: #717171;
   opacity: 0.2;
   cursor: not-allowed;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--orange) !important;
+  opacity: 1 !important;
+}
+
+.swiper-button-prev {
+  color: var(--orange) !important;
+}
+
+.swiper-button-next {
+  color: var(--orange) !important;
 }

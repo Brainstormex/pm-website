@@ -1,10 +1,12 @@
 'use strict';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import footerData from '../../data/footer.json';
 import Image from 'next/image';
 import smallLogo from '../../assets/smallLogo.svg'
 import { MainMenus, MenuItem } from '@/types/common';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { adsService } from '@/services/adsService';
 
 // Separate components for better organization and reusability
 const SocialLinks = ({ links }: { links:MenuItem[]}) => (
@@ -24,7 +26,7 @@ const SocialLinks = ({ links }: { links:MenuItem[]}) => (
             className='object-contain'
           />
         ) : (
-          item.label
+        ""
         )}
       </Link>
     ))}
@@ -74,6 +76,22 @@ const CircularImage = ({
 );
 const MainFooter = ({ menuItems }: { menuItems: MainMenus }) => {
   // const { headerText, sections, copyright, bottomLinks } = footerData.footerData;
+
+  const pathname = usePathname();
+  console.log("Current page:", pathname);
+
+  useEffect(() => {
+    const fetchAds = async () => {
+      try {
+        const adsData = await adsService.getAdsJs(pathname as string);
+        console.log("Ads data:", adsData);
+      } catch (error) {
+        console.error("Error fetching ads:", error);
+      }
+    };
+
+    fetchAds();
+  }, []);
 
   const [sectionsData] = useState<MenuItem[][]>(
     [menuItems.FooterCol1,menuItems.FooterCol2,menuItems.FooterCol3,menuItems.FooterCol4,menuItems.FooterCol5,menuItems.FooterCol6]);
@@ -148,16 +166,16 @@ const MainFooter = ({ menuItems }: { menuItems: MainMenus }) => {
             )}
           </div>
 
-          <div className="flex flex-col md:flex-row justify-between items-center mt-8">
+          <div className="flex flex-col-reverse md:flex-row justify-between items-center mt-8">
             <div className="lg:w-1/2">
-              <p className="text-sm mb-4 md:mb-0">{`Copyright ${new Date().getFullYear()} People Matters Media Pvt. Ltd. All rights reserved.`}</p>
+              <p className="text-[10px] md:text-xs text-white/60">{`Copyright ${new Date().getFullYear()} People Matters Media Pvt. Ltd. All rights reserved.`}</p>
             </div>
-            <div className="flex space-x-6 lg:w-1/2 flex-row justify-between">
+            <div className="flex space-x-6 lg:w-1/2 flex-row justify-between mb-4 md:mb-0">
               {menuItems.BottomMenu.map(({ label, href }) => (
                 <a
                   key={label}
                   href={href}
-                  className="text-sm text-gray-300 hover:text-white transition-colors"
+                  className="text-[10px] md:text-xs text-white/60 hover:text-white transition-colors"
                 >
                   {label}
                 </a>

@@ -5,19 +5,41 @@ import { pageService } from "@/services/pageServices";
 import { headers } from "next/headers";
 import VideoListing from "./VideoListing";
 // import BrandReachout from "@/components/Header/BrandReachout";
+function extractAllPostIds(section: any): string[] {
+  let postIds: string[] = [];
+
+  if (section.articles && Array.isArray(section.articles)) {
+    postIds = postIds.concat(
+      section.articles
+        .filter((article: any) => article.post_id)
+        .map((article: any) => article.post_id)
+    );
+  }
+
+  if (section.sections && Array.isArray(section.sections)) {
+    for (const subsection of section.sections) {
+      postIds = postIds.concat(extractAllPostIds(subsection));
+    }
+  }
+
+  return [...new Set(postIds)];
+}
+
 
 export default async function VideosPage() {
+  
 
 
   const host = (await headers()).get('x-forwarded-host') 
   ?? (await headers()).get('host') 
   ?? ''; 
 
-  const pageData = await pageService.getPageDataBySlug( "videos",host);
-
+  const pageData = await pageService.getPageDataBySlug("videos",host);
+ const postIds = extractAllPostIds(pageData?.data || {});
+  // console.log("Extracted post_ids:", postIds);
   return (
     <>
-      <VideoListing data={pageData?.data} />
+      <VideoListing data={pageData?.data} postIds={postIds} />
     </>
   );
 }

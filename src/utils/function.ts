@@ -1,6 +1,6 @@
 import { pageService } from "@/services/pageServices";
-import { Article, PageSectionData, Section, SeoData } from "@/types/common";
-import { fetchCategoryData } from "@/services/homeService";
+import { Article, PageSectionData, Podcast, PodcastEpisode, PodcastSeason, Section, SeoData } from "@/types/common";
+import { fetchData } from "@/services/homeService";
 
 export async function fetchDataForSlug(
   slug: string
@@ -900,116 +900,117 @@ const categorySectionPagesData2: Section[] = [
   
 ];
 
-const sponsoredData: Section[] = [
-  {
-    title: "Featured",
-    description: "",
-    template: "research_section",
-    type: "section",
-    image: "/featured.jpg",
-    link: "/featured",
-    articles: articleData,
-  },
-  {
-    title: "Ads", 
-    description: "ads",
-    link: "/national",
-    template: "ads_section",
-    type: "ads",
-    image: "/assets/images/7.webp",
-  },
+// Commented not deleted because we may need the schema strucuture later in the future
+// const sponsoredData: Section[] = [
+//   {
+//     title: "Featured",
+//     description: "",
+//     template: "research_section",
+//     type: "section",
+//     image: "/featured.jpg",
+//     link: "/featured",
+//     articles: articleData,
+//   },
+//   {
+//     title: "Ads", 
+//     description: "ads",
+//     link: "/national",
+//     template: "ads_section",
+//     type: "ads",
+//     image: "/assets/images/7.webp",
+//   },
 
-  {
-    title: "Two Column Layout",
-    description: "Latest developments",
-    template: "two_column_layout",
-    type: "section",
-    articles: articleData,
-    image: "/featured-news.jpg",
-    link: "/featured-news",
-    sections: [
-      {
-        title: "Left Section",
-        description: "Latest developments",
-        template: "left_section",
-        type: "section",
-        articles: articleData,
-        image: "/featured-news.jpg",
-        link: "/featured-news",
-        sections: [
-          {
-            title: "LEADERSHIP",
-            description: "Latest developments",
-            template: "trending_section_left",
-            type: "section",
-            image: "/featured.jpg",
-            link: "/featured",
-            articles: articleData,
-          },
-          {
-            title: "Trending",
-            description: "Latest developments",
-            template: "trending_section_left",
-            type: "section",
-            image: "/trending.jpg",
-            link: "/trending",
-            articles: articleData,
-          },
-          {
-            title: "Ads",
-            description: "ads",
-            link: "/national",
-            template: "ads_section",
-            type: "ads",
-            image: "/assets/images/7.webp",
-          },
-          {
-            title: "Featured",
-            description: "Latest developments",
-            template: "current_section",
-            type: "section",
-            image: "/featured.jpg",
-            link: "/featured",
-            articles: articleData,
-          },
-        ],
-      },
-      {
-        title: "Right Section",
-        description: "Latest developments",
-        template: "right_section",
-        type: "section",
-        articles: articleData,
-        image: "/featured-news.jpg",
-        link: "/featured-news",
-        sections: [
-          {
-            title: "Ads",
-            description: "ads",
-            link: "/national",
-            template: "ads_section",
-            type: "ads",
-            image: "/assets/images/9.webp",
-          },
+//   {
+//     title: "Two Column Layout",
+//     description: "Latest developments",
+//     template: "two_column_layout",
+//     type: "section",
+//     articles: articleData,
+//     image: "/featured-news.jpg",
+//     link: "/featured-news",
+//     sections: [
+//       {
+//         title: "Left Section",
+//         description: "Latest developments",
+//         template: "left_section",
+//         type: "section",
+//         articles: articleData,
+//         image: "/featured-news.jpg",
+//         link: "/featured-news",
+//         sections: [
+//           {
+//             title: "LEADERSHIP",
+//             description: "Latest developments",
+//             template: "trending_section_left",
+//             type: "section",
+//             image: "/featured.jpg",
+//             link: "/featured",
+//             articles: articleData,
+//           },
+//           {
+//             title: "Trending",
+//             description: "Latest developments",
+//             template: "trending_section_left",
+//             type: "section",
+//             image: "/trending.jpg",
+//             link: "/trending",
+//             articles: articleData,
+//           },
+//           {
+//             title: "Ads",
+//             description: "ads",
+//             link: "/national",
+//             template: "ads_section",
+//             type: "ads",
+//             image: "/assets/images/7.webp",
+//           },
+//           {
+//             title: "Featured",
+//             description: "Latest developments",
+//             template: "current_section",
+//             type: "section",
+//             image: "/featured.jpg",
+//             link: "/featured",
+//             articles: articleData,
+//           },
+//         ],
+//       },
+//       {
+//         title: "Right Section",
+//         description: "Latest developments",
+//         template: "right_section",
+//         type: "section",
+//         articles: articleData,
+//         image: "/featured-news.jpg",
+//         link: "/featured-news",
+//         sections: [
+//           {
+//             title: "Ads",
+//             description: "ads",
+//             link: "/national",
+//             template: "ads_section",
+//             type: "ads",
+//             image: "/assets/images/9.webp",
+//           },
         
-        ],
-      },
-    ],
-  },
+//         ],
+//       },
+//     ],
+//   },
 
-  {
-    title: "Premium Content",
-    heading: "Level up your people game today!",
-    description: "Subscribe today and get access to our magazine, premium content, columns, event access, research findings and more...",
-    image: "/premium.jpg",
-    link: "/premium",
-    template: "premium_section",
-    type: "section",
-    articles: premiumArticles
-  },
+//   {
+//     title: "Premium Content",
+//     heading: "Level up your people game today!",
+//     description: "Subscribe today and get access to our magazine, premium content, columns, event access, research findings and more...",
+//     image: "/premium.jpg",
+//     link: "/premium",
+//     template: "premium_section",
+//     type: "section",
+//     articles: premiumArticles
+//   },
  
  
-];
+// ];
 
 
 const researchArticlesData = [
@@ -1607,7 +1608,7 @@ export async function getPageData(slug: string): Promise<Section[] | null> {
 
   // For strategy page, fetch from politics API (or appropriate endpoint)
   if (slug.toLowerCase() === "strategy") {
-    const data = await fetchCategoryData("politics");
+    const data = await fetchData("politics");
     console.log("category data", data);
     return data || categorySectionPagesData1; // Fallback to static data if API fails
   } else if (slug.toLowerCase() === "leadership") {
@@ -1615,7 +1616,8 @@ export async function getPageData(slug: string): Promise<Section[] | null> {
   } else if (slug.toLowerCase() === "recruitment") {
     return categorySectionPagesData3;
   } else if (slug.toLowerCase() === "sponsored") {
-    return sponsoredData;
+    const data = await fetchData("sponsored");
+    return data;
   } 
   
   else if (slug.toLowerCase() === "articles") {
@@ -1624,7 +1626,7 @@ export async function getPageData(slug: string): Promise<Section[] | null> {
 
   // For category pages, fetch from appropriate API endpoint
   if (categoryPages.includes(slug.toLowerCase())) {
-    const data = await fetchCategoryData(slug.toLowerCase());
+    const data = await fetchData(slug.toLowerCase());
     return data || categorySectionPagesData1; // Fallback to static data if API fails
   }
 
@@ -1730,3 +1732,120 @@ export const categoryData: Article[] = [
     date: new Date().toLocaleDateString()
   }
 ];
+
+
+export const seasons: PodcastSeason[] = [
+  {
+    id: "season03",
+    title: "Season 3",
+    subtitle: "From inspiration to action",
+  },
+  {
+    id: "season02",
+    title: "Season 2",
+    subtitle: "Kaleidoscope of Cultures",
+  },
+  {
+    id: "season01",
+    title: "Season 1",
+    subtitle: "The Art of Impossible",
+  },
+];
+
+export const episodes: PodcastEpisode[] = [
+  {
+    id: "1",
+    number: "01",
+    title: "Positive Workspace Attracts Top Talent",
+    slug: "positive-workspace-attracts-top-talent",
+    subtitle: "Positive Workspace Attracts Top Talent",
+    play_link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    speaker_name: "Ashwani Prashara",
+    speaker_title: "CHRO, Reliance India",
+    duration: "42 mis 27 secs",
+    description:
+      "A positive work environment, centered on safety, learning, and holistic well-being, is key to attracting top talent and ensuring that employees feel valued.",
+    image: "/assets/images/dummy.jpg",
+    season_id: "season01",
+    date: "2024-01-01",
+  },
+  {
+    id: "2",
+    number: "02",
+    title: "The Power of the Five B's Framework",
+    slug: "the-power-of-the-five-b-s-framework",
+    subtitle: "The Power of the Five B's Framework",
+    play_link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    speaker_name: "Khim Tan",
+    speaker_title: "Former Group CHRO, Alliance Bank Malaysia",
+    duration: "33 mis 19 secs",
+    description:
+      "Lorem ipsum odor amet, consectetuer adipiscing elit. Turpis commodo magnis arcu erat erat. Amet tempus ornare inceptos aptent dignissim. Fermentum mi...",
+    image: "/assets/images/dummy.jpg",
+    season_id: "season01",
+    date: "2024-01-01",
+  },
+  {
+    id: "3",
+    number: "03",
+    title: "Corporate Culture is a Collective Creation",
+    slug: "corporate-culture-is-a-collective-creation",
+    subtitle: "Corporate Culture is a Collective Creation",
+    play_link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    speaker_name: "Sahil Mathur",
+    speaker_title: "CHRO, InMobi Group",
+    duration: "41 mis 44 secs",
+    description:
+      "An 'entity' that lives in every part of the company and in the vision that each member of the work team has of the business. Corporate culture is not an abst...",
+    image: "/assets/images/dummy.jpg",
+    season_id: "season01",
+    date: "2024-01-01",
+  },
+  {
+    id: "4",
+    number: "01",
+    title: "Season 2 Episode 1",
+    slug: "season-2-episode-1",
+    subtitle: "Season 2 Episode 1",
+    play_link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    speaker_name: "John Doe",
+    speaker_title: "CEO, Example Corp",
+    duration: "45 mis 00 secs",
+    description: "Example quote for season 2 episode 1",
+    image: "/assets/images/dummy.jpg",
+    season_id: "season02",
+    date: "2024-01-01",
+  },
+  {
+    id: "5",
+    number: "02",
+    title: "Season 2 Episode 2",
+    slug: "season-2-episode-2",
+    subtitle: "Season 2 Episode 2",
+    play_link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    speaker_name: "Jane Smith",
+    speaker_title: "CTO, Example Corp",
+    duration: "38 mis 15 secs",
+    description: "Example quote for season 2 episode 2",
+    image: "/assets/images/dummy.jpg",
+    season_id: "season02",
+    date: "2024-01-01",
+  },
+  {
+    id: "6",
+    number: "01",
+    title: "Season 1 Episode 1",
+    slug: "season-1-episode-1",
+    subtitle: "Season 1 Episode 1",
+    play_link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    speaker_name: "Bob Johnson",
+    speaker_title: "Founder, Example Inc",
+    duration: "50 mis 30 secs",
+    description: "Example quote for season 1 episode 1",
+    image: "/assets/images/dummy.jpg",
+    season_id: "season03",
+    date: "2024-02-01",
+  },
+];
+
+

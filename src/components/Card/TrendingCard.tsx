@@ -8,6 +8,7 @@ import { hoverVariants } from "./cardVariants";
 import Link from "next/link";
 import { Play } from "lucide-react";
 import Modal from "../Modal/Modal";
+import { FirstCategory } from "@/services/commonFunction";
 
 // Define the variants using cva
 const cardVariants = cva(
@@ -135,16 +136,21 @@ export const TrendingCard = ({
         )} justify-start border-b-0.5 border-border last:border-b-0.5 w-full lg:py-0 py-4`}
       >
         {/* Render image if imageUrl is provided */}
-        <div className="relative">
+        <div className={`relative ${imageStyle === "circle" ? "pb-4" : ""}`}>
           {layout === "horizontal" && (
-            <div className="lg:h-32 lg:w-48 h-24 w-32 flex-shrink-0">
+            <div className={
+              imageStyle === "circle"
+                ? "lg:w-32 lg:h-32 w-24 h-24 flex-shrink-0 aspect-square"
+                : "lg:h-32 lg:w-48 h-24 w-32 flex-shrink-0"
+            }>
               {isVideo ? (
                 <div className="relative cursor-pointer" onClick={handleCardClick}>
                   <Image
-                    className={twMerge(
+                    className={`${twMerge(
                       imageVariants({ variant: imageStyle }),
-                      hoverVariants[hoverStyle]
-                    )}
+                      hoverVariants[hoverStyle],
+                      imageStyle === "circle" ? "aspect-square" : "aspect-video"
+                    )}`}
                     src={data.image ? data.image : "/assets/images/dummy.jpg"}
                     width={1200}
                     height={1200}
@@ -164,7 +170,8 @@ export const TrendingCard = ({
                   <Image
                     className={twMerge(
                       imageVariants({ variant: imageStyle }),
-                      hoverVariants[hoverStyle]
+                      hoverVariants[hoverStyle],
+                      imageStyle === "circle" ? "aspect-square" : "aspect-video"
                     )}
                     src={data.image ? data.image : "/assets/images/dummy.jpg"}
                     width={1200}
@@ -267,13 +274,15 @@ export const TrendingCard = ({
                 </span>
               )}
               <span className={`${template === "trending_section_right" ? "text-inactiveGray" : "text-inkBlack"} text-xs font-medium font-inter`}>
-                <Link href={data.categorySlug || "#"}>{data.category}</Link>
+                <Link href={data.categorySlug || "#"}>{data.category ? FirstCategory(data.category || "") : "Not Avialable"}</Link>
               </span>
               {template !== "trending_section_right" && (
                 <>
+                {data.categorySlug && data.authorSlug && (
               <span className="mx-2">/</span>
+              )}
               <span className="text-inactiveGray font-medium text-xs font-inter">
-                <Link href={data.authorSlug || "#"}>{data.author}</Link>
+                <Link href={data.authorSlug || "#"}>{data.author ? data.author : "Not Avialable"}</Link>
               </span>
               </>
               )}

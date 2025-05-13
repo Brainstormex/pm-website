@@ -1,3 +1,5 @@
+
+
 export const shortenText = (text: string, maxLength: number): string => {
     if (text.length <= maxLength) return text;
     return text.slice(0, maxLength) + '...';
@@ -59,3 +61,12 @@ export const shortenText = (text: string, maxLength: number): string => {
   }
   
   
+  export const FirstCategory = ( input:string ) => {
+    const getFirstCategory = (text: string): string => {
+      return text.split(',')[0].trim();
+    };
+  
+    const firstValue = getFirstCategory(input);
+  
+    return firstValue;
+  };

@@ -26,9 +26,8 @@ const getOrdinalSuffix = (day: string) => {
 };
 
 export default function EventsListing({ data }: { data: EventData }) {
-  // Ensure data.events exists to avoid TypeScript errors
-  const events = data.events && data.events.length > 0 ? data.events : eventsData;
-
+  // Use dummy data only if events is undefined or null, not if it's an empty array
+  const events = (data.events === undefined || data.events === null) ? eventsData : data.events;
   const hasEvents = events && events.length > 0;
 
   return (

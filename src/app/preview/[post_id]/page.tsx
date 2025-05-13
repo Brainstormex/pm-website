@@ -5,9 +5,10 @@ import ArticlePreview from "@/components/ArticlePreview";
 import { useEffect, useState } from "react";
 import { articleService } from "@/services/articleService";
 import { useParams } from "next/navigation";
-import { ArticleData, Section } from "@/types/common";
+import {  Section } from "@/types/common";
 import { Author } from "@/types/common";
 import crypto from 'crypto';
+import { ArticleData } from "@/types/article.types";
 
 
 export default function ArticlePage() {
@@ -19,59 +20,7 @@ export default function ArticlePage() {
 
   const fullPath = `test`;
 
-  const [articleData, setArticleData] = useState<ArticleData>({
-    slug: "",
-    fullpath: "",
-    post_type: "",
-    meta_data: {
-      published_time: "",
-      modified_time: "",
-      section: "",
-      tags: [],
-      seo: {
-        keywords: "",
-        description: "",
-      },
-      og: {
-        title: "",
-        description: "",
-        image: "",
-        url: "",
-        type: "",
-      },
-      twitter: {
-        title: "",
-        description: "",
-        image: "",
-        card: "",
-        site: "",
-        creator: "",
-      },
-      facebook: {
-        title: "",
-        description: "",
-        image: "",
-      },
-    },
-    title: "",
-    description: "",
-    hero_image: "",
-    json_content: [],
-    content: "",
-    topics: [],
-    category: [],
-    author: [],
-    authors: [],
-  });
-
-  // if (articleData.fullpath !== fullPath && articleData.fullpath) {
-  //   // return {
-  //   //   redirect: {
-  //   //     destination: `/${articleData.fullpath}`,
-  //   //     permanent: true, // This makes it a 301 redirect
-  //   //   },
-  //   // };
-  // }
+  const [articleData, setArticleData] = useState<ArticleData | null>(null);
 
   const postId = decodeURIComponent(params?.post_id as string);
 

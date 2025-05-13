@@ -43,6 +43,8 @@ export default function LoginForm({ onOTPScreenChange }: LoginFormProps) {
     // Check if the value contains any numbers
     return /^\d+$/.test(value);
   };
+  
+  // const isEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -148,12 +150,23 @@ export default function LoginForm({ onOTPScreenChange }: LoginFormProps) {
             type="text"
             value={identifier}
             onChange={(e) => setIdentifier(e.target.value)}
+            // onChange={(e) => {
+            //   const value = e.target.value;
+            //   // If only digits, restrict to 10
+            //   if (/^\d*$/.test(value)) {
+            //     setIdentifier(value.slice(0, 10));
+            //   } else {
+            //     setIdentifier(value);
+            //   }
+            // }}
             placeholder="Enter Email / 10-Digit Mobile"
             className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent"
             required
             whileFocus="focus"
             variants={inputVariants}
             initial="blur"
+            // maxLength={10}
+            // inputMode="numeric"
           />
           <AnimatePresence>
             {identifier && (

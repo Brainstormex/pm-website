@@ -5,14 +5,26 @@ import React from 'react';
 const PodcastHeader: React.FC = () => {
   
   return (
-    <section className="w-full pt-4 pb-16 px-4 md:px-8 lg:px-16 bg-white">
-      <div className="max-w-7xl border-b pb-10 mb-10 border-inactiveGray mx-auto">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+    <section className="w-full py-4  px-4 md:px-8 lg:px-16 bg-white">
+      <div className="max-w-7xl lg:border-b pb-10 mb-10 border-inactiveGray mx-auto">
+        <div className="flex items-center justify-between gap-8">
           {/* Content Section */}
           <div className="w-full md:w-2/3">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4 text-gray-900">
-              Podcasts<span className="text-orange">.</span>
-            </h1>
+            <div className="flex items-center justify-between">
+              <h1 className="text-5xl md:text-6xl font-bold mb-4 text-gray-900">
+                Podcasts<span className="text-orange">.</span>
+              </h1>
+              <Image
+                src="/assets/images/PodcastImage.png"
+                alt="People Matters Unplugged Podcast"
+                width={100}
+                height={100}
+                className="md:hidden block"
+                // fill
+                // className="object-contain"
+                // sizes="(max-width: 768px) 100vw, 33vw"
+              />
+            </div>
             <p className="text-foreground text-base md:text-lg leading-relaxed">
               People Matters Unplugged is a podcast series that delves into the dynamic world of HR and the future of work. It features
               insightful conversations with industry leaders, experts, and practitioners, exploring topics like talent management,
@@ -22,7 +34,7 @@ const PodcastHeader: React.FC = () => {
           </div>
 
           {/* Image Section */}
-          <div className="w-full md:w-1/3 flex justify-center md:justify-end">
+          <div className="w-full md:w-1/3 hidden md:flex justify-center md:justify-end">
             <div className="relative w-64 h-64">
               <Image
                 src="/assets/images/PodcastImage.png"

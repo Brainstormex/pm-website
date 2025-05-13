@@ -75,9 +75,9 @@ const SearchModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
             <input 
               type="text" 
               placeholder="Search..."
-              className="w-full px-4 ps-10 ml-o py-2 border border-gray-300 border-t-0 border-l-0 border-r-0 text-base md:text-lg focus:outline-none"
+              className="w-full px-4 ps-10 pr-28 py-2 border border-gray-300 border-t-0 border-l-0 border-r-0 text-base md:text-lg focus:outline-none"
             />
-            <button className='absolute right-1 top-1/2 flex items-center text-borderGray gap-x-1 font-medium uppercase -translate-y-1/2 text-sm md:text-base'>
+            <button className='absolute right-1 top-1/2 bg-background flex items-center text-borderGray gap-x-1 font-medium uppercase -translate-y-1/2 text-sm md:text-base'>
               Search <ChevronRightIcon className='w-4 h-4 md:w-6 md:h-6 text-borderGray' />
             </button>
             <Search className='absolute left-1 top-1/2 -translate-y-1/2 text-borderGray w-4 h-4 md:w-5 md:h-5' />

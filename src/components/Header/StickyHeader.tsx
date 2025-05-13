@@ -2,21 +2,38 @@ import Link from "next/link";
 import Image from "next/image";
 // import { MainMenus } from "@/types/common";
 import { Button } from "../ui/Button";
-import {  useState } from "react";
+import { useState, useEffect, useRef } from "react";
 // import { MenuIcon } from "lucide-react";
 import searchIcon from "@/assets/search.svg";
 import { MainMenus } from "@/types/common";
+import useScrollbarWidth from "@/hooks/useScrollbarWidth";
+import useStickyHeaderHeight from "@/hooks/useStickyHeaderHeight";
+import { useStickyHeaderContext } from "@/context/HeaderContext";
 interface HeaderProps {
   items: MainMenus;
   isScroll: boolean;
+  scrollbarWidth: number;
 }
 
-const StickyHeader = ({ items, isScroll }: HeaderProps) => {
+const StickyHeader = ({ items, isScroll, scrollbarWidth }: HeaderProps) => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement | null>(null);
+  const headerHeight = useStickyHeaderHeight(headerRef);
+  const { setHeaderHeight } = useStickyHeaderContext();
+  console.log('header height', headerHeight)
+  useEffect(() => {
+    setHeaderHeight(headerHeight);
+  }, [headerHeight]);
 
   return (
-    <header
+    <header ref={headerRef}
+      style={{ 
+        paddingRight: scrollbarWidth > 0 ? `${scrollbarWidth}px` : '0',
+        width: '100%',
+        right: 0,
+        left: 0,
+      }}
       className={`hidden lg:flex flex-col fixed top-0 z-50 w-full mx-auto ease-in-out 
         backdrop-blur-md bg-white border-b border-gray-200/20
         ${isScroll ? "translate-y-0 duration-300" : "-translate-y-full duration-300"}

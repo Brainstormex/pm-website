@@ -22,8 +22,8 @@ const JobCard: React.FC<JobCardProps> = ({
         {title} {team && `(${team})`}
       </h3>
 
-      <div className="flex flex-col lg:flex-row lg:justify-between gap-4">
-        <div className="flex flex-wrap gap-4 w-full lg:w-auto">
+      <div className="flex flex-col lg:flex-row lg:justify-between gap-14">
+        {/* <div className="flex flex-wrap gap-4 w-full lg:w-auto"> */}
           <div>
             <p className="text-xs font-semibold text-inkBlack/40">Location</p>
             <p className="text-inkBlack">{location}</p>
@@ -36,8 +36,8 @@ const JobCard: React.FC<JobCardProps> = ({
             <p className="text-xs font-semibold text-inkBlack/40">Posted On</p>
             <p className="text-inkBlack">{postedOn}</p>
           </div>
-        </div>
-        <div className="lg:ml-auto w-full lg:w-auto">
+        {/* </div> */}
+        <div className="">
           <Button className="w-full lg:w-auto">DOWNLOAD JOB NOTE</Button>
         </div>
       </div>

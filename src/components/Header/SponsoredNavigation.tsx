@@ -29,12 +29,12 @@ interface SponsoredNavigationProps {
 const SponsoredNavigation: React.FC<SponsoredNavigationProps> = ({ data }) => {
   return (
     <nav className="w-full">
-      <div className="flex space-x-8 overflow-x-auto">
+      <div className="flex space-x-4 md:space-x-6 lg:space-x-8 overflow-x-auto py-2 scrollbar-hide">
         {data.navItems.map((item, index) => (
           <a
             key={index}
             href={item.href}
-            className={`text-gray-800 whitespace-nowrap hover:text-orange-500 transition-colors ${
+            className={`text-sm md:text-base text-gray-800 whitespace-nowrap hover:text-orange-500 transition-colors pb-1 ${
               index === 0 ? "font-bold" : "font-medium"
             }`}
           >

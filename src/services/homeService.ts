@@ -21,7 +21,7 @@ export async function fetchHomePageData() {
   }
 }
 
-export async function fetchCategoryData(category: string) {
+export async function fetchData(category: string) {
   try {
     const response = await fetch(`https://api-uat-pm.enpointe.io/api/collection/${category}`, {
       headers: {
@@ -41,6 +41,8 @@ export async function fetchCategoryData(category: string) {
     return null;
   }
 }
+
+
 
 export async function fetchLeadershipData() {
   try {

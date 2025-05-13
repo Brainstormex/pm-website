@@ -11,11 +11,16 @@ export default async function CategoryPage({ params }: PageProps) {
   const { sub_category } = resolvedParams;
 
   const categoryData = await pageService.getSubCategory(sub_category || "");
+ 
+ 
   const pageData = await pageService.getPageDataBySlug(sub_category || "");
 
+
+  console.log(pageData,"pageData?.data?.sections");
   return (
     <>
       <SubCategoryHeader data={categoryData.data || {}} />
+      
       {pageData && pageData.data && pageData.data.sections && <PageRenderer slug={sub_category || ""} type="section" data={pageData?.data?.sections as Section[] | []} />}
     </>
   );

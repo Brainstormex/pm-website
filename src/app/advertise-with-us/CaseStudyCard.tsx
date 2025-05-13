@@ -25,7 +25,7 @@ const CaseStudyCard = ({
           className="object-cover"
         />
       </div>
-        <div className="flex gap-6">
+        <div className="flex gap-6 mb-3">
           <div className="h-14 w-14 bg-gray-600" />
           <div className="flex flex-col justify-center">
             <p className="text-xs font-semibold text-gray-600 uppercase">

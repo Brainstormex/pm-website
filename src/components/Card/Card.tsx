@@ -66,7 +66,7 @@ export const Card = ({
         {layout !== "horizontal" && (
           <Link className=" block" href={data?.link ? data?.link : "/"}>
             <Image
-              className={`${"h-full object-cover rounded-[4px] "} ${
+              className={`${"h-full object-cover aspect-video rounded-[4px] "} ${
                 imageVariants[imageStyle]
               } ${hoverVariants[hoverStyle]}`}
               src={
@@ -100,13 +100,15 @@ export const Card = ({
         {/* Overlay text on image if textOnImage is true */}
         {textOnImage && (
           <div className="absolute inset-0 flex flex-col justify-end py-4 px-0 bg-gradient-to-t from-black/60 to-transparent">
-            <div className="flex items-center text-sm text-description font-normal my-3">
+            <div className="flex items-center font-inter text-sm text-description font-normal my-3">
               <span className="text-white whitespace-nowrap">
                 <Link href={data.categorySlug ? data.categorySlug : "/"}>
                   {data.category ? shortenText(data.category, 10) : "Not Available"}
                 </Link>
               </span>
-              <span className="mx-2 text-white">/</span>
+              {data.categorySlug && data.authorSlug && (
+                <span className="mx-2 text-white">/</span>
+              )}
               <span className="text-white">
                 <Link href={data.authorSlug ? data.authorSlug : "/"}>
                   {data.author}

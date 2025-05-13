@@ -2,10 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import MainHeader from "./MainHeader";
 import { MainMenus } from "@/types/common";
 import StickyHeader from "./StickyHeader";
+import useScrollbarWidth from "@/hooks/useScrollbarWidth";
 
 const Header = ({ type = "main", menuItems }: { type?: string; menuItems: MainMenus }) => {
   const [isSticky, setIsSticky] = useState(false);
   const headerRef = useRef<HTMLDivElement | null>(null);
+  const scrollbarWidth = useScrollbarWidth();
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -35,7 +38,7 @@ const Header = ({ type = "main", menuItems }: { type?: string; menuItems: MainMe
         <div ref={headerRef}>
           <MainHeader items={menuItems} />
         </div>
-        <StickyHeader items={menuItems} isScroll={isSticky} />
+        <StickyHeader items={menuItems} isScroll={isSticky} scrollbarWidth={scrollbarWidth} />
       </>
     );
   }

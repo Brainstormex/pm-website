@@ -100,10 +100,20 @@ export default function SignupForm() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
-    }));
+    
+    if (name === 'mobile') {
+      // Only allow numbers and limit to 10 digits
+      const numericValue = value.replace(/[^0-9]/g, '').slice(0, 10);
+      setFormData(prev => ({
+        ...prev,
+        [name]: numericValue
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: type === 'checkbox' ? checked : value
+      }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -164,10 +174,10 @@ export default function SignupForm() {
   const formValid =
     formData.email &&
     formData.mobile &&
-    formData.fname &&
-    formData.lname &&
-    formData.company_name &&
-    formData.designation &&
+    // formData.fname &&
+    // formData.lname &&
+    // formData.company_name &&
+    // formData.designation &&
     formData.fk_country_id &&
     formData.is_accept_terms;
 
@@ -190,16 +200,26 @@ export default function SignupForm() {
       </svg>
 
       {/* Header with Logo and Back button */}
-      <div className='w-full max-w-7xl flex lg:flex-row flex-col justify-between items-center gap-x-16 mb-16 mt-5'>
-        <Link href="/" className="hidden lg:inline-block">
-          <span className="text-sm font-bold tracking-[0.2em]">GO BACK</span>
+      <div className='w-full max-w-7xl flex justify-center md:justify-between items-center md:mb-16 mt-5'>
+        <Link href="/" className="hidden md:inline-block">
+          <span className="text-[10px] font-bold tracking-[0.2em]">GO BACK</span>
         </Link>
         <div className='ml-5'>
           <PeopleMattersLogo className="h-8" />
         </div>
-        <div className="text-right">
+        <div className="hidden md:inline-block text-right font-medium text-sm">
           <span className="text-orange">*</span>
-          <span className="text-orange text-sm"> are mandatory fields.</span>
+          <span className="text-orange"> are mandatory fields.</span>
+        </div>
+      </div>
+      {/* responsive */}
+      <div className='w-full flex justify-between items-center gap-x-16 mb-16 mt-5 md:hidden'>
+        <Link href="/" className="">
+          <span className="text-[10px] font-bold tracking-[0.2em]">GO BACK</span>
+        </Link>
+        <div className="text-right font-medium text-[10px]">
+          <span className="text-orange">*</span>
+          <span className="text-orange"> are mandatory fields.</span>
         </div>
       </div>
 
@@ -211,10 +231,10 @@ export default function SignupForm() {
           onChangeNumber={handleChangeNumber}
         />
       )}
-      {!showOTP && <div className="relative min-h-screen overflow-hidden flex flex-col items-center p-4">
+      {!showOTP && <div className="relative overflow-hidden flex flex-col items-center p-4">
 
         <motion.div
-          className="flex-1 flex flex-col items-center justify-start w-full max-w-md"
+          className="flex-1 flex flex-col items-center justify-start w-full max-w-md mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -267,7 +287,7 @@ export default function SignupForm() {
               {/* Mobile */}
               <div className="relative">
                 <motion.input
-                  type="tel"
+                  type="text"
                   name="mobile"
                   value={formData.mobile}
                   onChange={handleInputChange}
@@ -277,6 +297,8 @@ export default function SignupForm() {
                   whileFocus="focus"
                   variants={inputVariants}
                   initial="blur"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
                 />
                 <AnimatePresence>
                   {formData.mobile && (
@@ -305,7 +327,7 @@ export default function SignupForm() {
                   onChange={handleInputChange}
                   placeholder="First Name"
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent"
-                  required
+                  // required
                   whileFocus="focus"
                   variants={inputVariants}
                   initial="blur"
@@ -334,7 +356,7 @@ export default function SignupForm() {
                   onChange={handleInputChange}
                   placeholder="Last Name"
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent"
-                  required
+                  // required
                   whileFocus="focus"
                   variants={inputVariants}
                   initial="blur"
@@ -363,7 +385,7 @@ export default function SignupForm() {
                   onChange={handleInputChange}
                   placeholder="Company Name"
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent"
-                  required
+                  // required
                   whileFocus="focus"
                   variants={inputVariants}
                   initial="blur"
@@ -392,7 +414,7 @@ export default function SignupForm() {
                   onChange={handleInputChange}
                   placeholder="Position"
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent"
-                  required
+                  // required
                   whileFocus="focus"
                   variants={inputVariants}
                   initial="blur"
@@ -424,6 +446,7 @@ export default function SignupForm() {
                 classNamePrefix="react-select"
                 placeholder="Select Country *"
                 isSearchable
+                required
               />
               {/* <div className="relative col-span-1 md:col-span-1">
                 <motion.select

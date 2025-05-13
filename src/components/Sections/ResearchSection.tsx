@@ -15,24 +15,24 @@ export const ResearchSection = ({ data }: { data: Section }) => {
   const sideArticles = articles.slice(1, 5);
 
   return (
-    <section className="max-w-7xl mx-auto lg:px-0 px-4 lg:py-0" data-template={data.template}>
+    <section className="max-w-7xl mx-auto lg:px-0 flex flex-col lg:gap-y-4  px-4 lg:py-0 py-6" data-template={data.template}>
       {/* Header */}
       {/* {JSON.stringify(data)} */}
-      <div className="flex justify-between items-start  pt-0">
-        <SectionHeading title={data.label || ""} link={data.link || ""} />
-      </div>
+  
+        <SectionHeading  title={data.label || ""}  link={data.link || ""} />
+
+        {data?.heading || data?.description && (
       <div className="flex flex-col gap-y-4">
-        {data.heading && (
           <h2 className="text-4xl text-foreground font-medium">
             {data?.heading}
           </h2>
-        )}
         {data.description && (
           <p className="text-gray-600 max-w-lg ">{data.description}</p>
         )}
       </div>
+        )}
       {/* Content Grid */}
-      <div className="flex flex-col lg:flex-row gap-4 mt-8">
+      <div className="flex flex-col lg:flex-row gap-4 ">
         {/* Featured Article - Takes 3 columns */}
         {featuredArticle && (
           <div className="lg:border-r border-border lg:w-3/5 lg:pr-4">
@@ -51,12 +51,12 @@ export const ResearchSection = ({ data }: { data: Section }) => {
                 <div className="space-y-3 pb-7">
                   <div className="flex items-center text-sm">
                     <span className="text-black">
-                      <Link href={featuredArticle.categorySlug || "#"}>{featuredArticle.category}</Link>
+                      <Link href={featuredArticle.categorySlug || "#"}>{featuredArticle.author ? featuredArticle.author : "Not Avialable"}</Link>
                       
                     </span>
                     <span className="mx-2">/</span>
                     <span className="text-description">
-                      <Link href={featuredArticle.authorSlug || "#"}>{featuredArticle.author}</Link>
+                      <Link href={featuredArticle.authorSlug || "#"}>{featuredArticle.author ? featuredArticle.author : "Not Avialable"}</Link>
                      
                     </span>
                   </div>
@@ -92,15 +92,15 @@ export const ResearchSection = ({ data }: { data: Section }) => {
               <div className="flex-grow">
                 <div className="flex items-center text-sm mb-2">
                     <span className="text-black">
-                    <Link href={article.categorySlug || "#"}>{article.category}</Link>
+                    <Link href={article.categorySlug || "#"}>{article.category ? article.category : "Not Available"}</Link>
                   </span>
                   <span className="mx-2">/</span>
                   <span className="text-description">
-                    <Link href={article.authorSlug || "#"}>{article.author}</Link>
+                    <Link href={article.authorSlug || "#"}>{article.author ? article.author : "Not Available"}</Link>
                   </span>
                 </div>
                 <Link href={article.link || "#"}>
-                <h3 className="font-medium line-clamp-2">{article.title}</h3>
+                <h3 className="font-medium line-clamp-2">{article.title ? article.title :  "Not Available"}</h3>
                 </Link>
               </div>
             </div>

@@ -97,7 +97,7 @@ const page = () => {
                   ></div>
                 ))}
               </div> */}
-              <p className="italic text-inkBlack">
+              <p className="italic text-inkBlack font-fraunces font-light text-[32px]">
                 Duis aute irure dolor in reprehenderit in voluptate velit esse
                 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
                 cupidatat non proident.

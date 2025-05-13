@@ -168,8 +168,9 @@ export const pageService = {
       const response = await fetch(`${pageService.getBaseUrl(host)}/api/collection/${slug}`, {
           next: { revalidate: revalidate } // Cache for 30 seconds
       });
-      console.log(response, "response");
+      // console.log(response, "response Videos");
       const data = await response.json();
+      // console.log(JSON.stringify(data),  "response Video ");
       return data;
     } catch (error) {
       console.error('Error fetching page data:', error);
@@ -226,6 +227,7 @@ export const pageService = {
         next: { revalidate: revalidate } // Cache for 30 seconds
       });
       const data = await response.json();
+      // console.log(data, "response getSubCategory");
       return data;
     } catch (error) {
       console.error('Error fetching page data:', error);
@@ -246,10 +248,23 @@ export const pageService = {
   },
   getEvents: async (archived?: boolean,host?: string) => {
     try {
-      const response = await fetch(`${pageService.getBaseUrl(host)}/api/event/${archived?"past":"upcoming"}`, {
+      const response = await fetch(`${pageService.getBaseUrl(host)}/api/event/list/${archived?"past":"upcoming"}`, {
         next: { revalidate: revalidate } // Cache for 30 seconds
       });
       const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching page data:', error);
+      return null;
+    }
+  },
+  getEventBySlug: async (slug: string, host?: string) => {
+    try {
+      const response = await fetch(`${pageService.getBaseUrl(host)}/api/event/${slug}`, {
+        next: { revalidate: revalidate } // Cache for 30 seconds
+      });
+      const data = await response.json();
+      console.log("getEventBySlug API response:", data);
       return data;
     } catch (error) {
       console.error('Error fetching page data:', error);
@@ -267,8 +282,29 @@ export const pageService = {
       console.error('Error fetching page data:', error);
       return null;
     }
+  },
+
+
+  getTagsCategoryBasedOnPostType: async (postIds: string, host?: string) => {
+    try {
+      const response = await fetch(`${pageService.getBaseUrl(host)}/api/collection/getcategory-tags/${postIds}`, 
+      {
+        next: { revalidate: revalidate } // Cache for 30 seconds
+      }
+    );
+
+      const data = await response.json();
+      // console.log(data, "response getTagsCategoryBasedOnPostType");
+      return data;
+    } catch (error) {
+      console.error('Error fetching CategoryTags data:', error);
+      return null;
+    }
   }
+
 };
+
+
 
 
 // const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/event`, {

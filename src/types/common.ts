@@ -12,6 +12,7 @@ export interface Article {
   dataType?: string;
   duration?: number;
   isVideo?: boolean;
+  location?: string;
 }
 
 
@@ -29,6 +30,7 @@ export interface Section {
   startDate?:string;
   heading?: string;
   buttontext?:string;
+  getBanner?:string;
   title?: string;
   label?: string;
   type: string;
@@ -151,8 +153,9 @@ export interface Speaker {
   id: string;
   name: string;
   email: string;
+  description: string;
   linkedIn?: string;
-  imageUrl?: string;
+  image?: string;
 };
 
 export interface Audience {
@@ -168,9 +171,9 @@ export interface WhoShouldAttend {
 }
 
 export interface Agenda {
-  description: string;
+  id: string;
   title: string;
-  reason: string[];
+  description: string;
 }
 
 export interface GalleryImage {
@@ -200,13 +203,16 @@ export interface Event {
   // Support both single image or array of images
   image?: string;
   images?: string[];
-  gallery?: GalleryImage[];
+  gallery?: string[];
   type: string;
   quote?: string;
   speakers?: Speaker[];
   keyInsights?: string[];
-  whoShouldAttend?: WhoShouldAttend;
+  whoShouldAttend?: string;
+  whyShouldAttend?: Agenda[];
   agenda?: Agenda[];
+  imageUrl?: string;
+  is_archived?: boolean;
   // Add any other properties your events have
 }
 export interface BrandInitiative {
@@ -347,11 +353,25 @@ export interface Author {
   last_name?: string;
 }
 
-export interface Season {
+export interface PodcastSeason {
   id: string;
   title: string;
   subtitle: string;
-  isActive: boolean;
+}
+export interface PodcastEpisode {
+  id: string;
+  number: string;
+  title: string;
+  slug: string;
+  subtitle: string;
+  speaker_name: string;
+  speaker_title: string;
+  duration: string;
+  description: string;
+  image: string;
+  play_link: string;
+  season_id: string;
+  date: string;
 }
 
 export interface SessionData {

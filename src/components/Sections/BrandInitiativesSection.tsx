@@ -19,7 +19,7 @@ export const BrandInitiativesSection = ({ data }: { data: Section }) => {
        <SectionHeading title={data.label || ""} link={data?.link || ""} buttontext={data?.buttontext ||  "GET IN TOUCH"} />
        
       </div>
-      <div className="flex flex-row justify-between w-full items-end ">
+      <div className="flex flex-col lg:flex-row justify-between w-full items-end lg:gap-y-0 gap-y-4">
 <div>
 
           <h2 className="text-4xl font-medium">{data.heading}</h2>

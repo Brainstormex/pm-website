@@ -3,8 +3,8 @@ import React from "react";
 import Image from "next/image";
 
 import Link from "next/link";
-import { ArticleData, Author } from "@/types/common";
 import CustomDateComponent from "@/components/ui/CustomDateComponent";
+import { ArticleData } from "@/types/article.types";
 // import { Bookmark, Facebook, Linkedin, Twitter } from 'lucide-react';
 
 interface ArticlePreviewProps {
@@ -12,17 +12,18 @@ interface ArticlePreviewProps {
 }
 
 const ArticlePreview: React.FC<ArticlePreviewProps> = ({ data }) => {
+  
   return (
     <div className=" mx-auto font-sans">
       {/* Category header */}
       <div className="mb-2">
-        <h3 className="text-gray-600 text-sm font-medium">
+        <h3 className="text-gray-600 text-sm font-medium capitalize">
           {/* {data?.meta_data?.section || ""} */}
           {/* making this category as the section is what is section? did not understood(US) */}
           <Link
             href={
-              data?.category?.[0]?.parent_id
-                ? `/category/${data?.category?.[0]?.parent_id?.slug}/${data?.category?.[0]?.slug}`
+              data?.category?.[0]?.parent
+                ? `/category/${data?.category?.[0]?.parent?.slug}/${data?.category?.[0]?.slug}`
                 : `/category/${data?.category?.[0]?.slug}`
             }
           >
@@ -37,7 +38,7 @@ const ArticlePreview: React.FC<ArticlePreviewProps> = ({ data }) => {
       </h1>
 
       {/* Author info and metadata */}
-      {data?.authors?.length > 0 && (
+      {(data?.authors ?? []).length > 0 && (
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center space-x-3">
             <div className="relative w-12 h-12 rounded-full overflow-hidden">
@@ -60,7 +61,9 @@ const ArticlePreview: React.FC<ArticlePreviewProps> = ({ data }) => {
                 >
                   {data?.authors?.[0]?.full_name
                     ? data?.authors?.[0]?.full_name
-                    : data?.authors?.[0]?.first_name}
+                    : `${data?.authors?.[0]?.first_name || ""} ${
+                        data?.authors?.[0]?.last_name || ""
+                      }`}
                 </Link>
                 <span className="text-gray-400">•</span>
                 <button className="text-gray-400 hover:text-gray-500">
@@ -68,6 +71,7 @@ const ArticlePreview: React.FC<ArticlePreviewProps> = ({ data }) => {
                 </button>
               </div>
               <div className="flex items-center text-gray-500 text-sm">
+                {/* {JSON.stringify(data?.authors?.[0]?.social_link )} */}
                 {data?.authors?.[0]?.social_link && (
                   <Link
                     href={data?.authors?.[0]?.social_link || ""}
@@ -84,7 +88,6 @@ const ArticlePreview: React.FC<ArticlePreviewProps> = ({ data }) => {
                   )}
                 <span>4 mins read</span>
                 <span className="mx-2">|</span>
-                {/* <span>{data?.meta_data?.published_time || ""}</span> */}
                 <CustomDateComponent
                   date={data?.meta_data?.published_time || ""}
                   format="iso"

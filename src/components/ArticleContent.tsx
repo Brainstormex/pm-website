@@ -8,9 +8,19 @@ import SectionHeading from "@/components/SectionHeading/SectionHeading";
 import Link from "next/link";
 import { Section } from "@/types/common";
 import TrendingSectionLeft from "@/components/Sections/TrendingSectionLeft";
+import { ArticleData, ContentBlock } from "@/types/article.types";
+import { Button } from "./ui/Button";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { File } from "lucide-react";
 
 interface ArticleContentProps {
-  data: any;
+  data: ArticleData;
   trendingData: Section;
 }
 
@@ -18,91 +28,203 @@ const ArticleContent: React.FC<ArticleContentProps> = ({
   data,
   trendingData,
 }) => {
+  const renderElement = (section: ContentBlock) => {
+    switch (section.type) {
+      case "header":
+        return (
+          <h2
+            key={section.id}
+            className="font-semibold text-lg uppercase text-foreground mb-4 leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: section.content }}
+          />
+        );
+      case "paragraph":
+        const cleanedContent = section.content.replace(
+          /style="([^"]*)"/gi,
+          (match, styles) => {
+            const cleanedStyles = styles
+              .split(";")
+              .filter(
+                (style: string) => !style.trim().startsWith("font-family")
+              )
+              .join(";");
+            return cleanedStyles ? `style="${cleanedStyles}"` : "";
+          }
+        );
+        return (
+          <p
+            key={section.id}
+            className="font-normal text-lg text-foreground mb-4 leading-relaxed !font-custom"
+            dangerouslySetInnerHTML={{ __html: cleanedContent }}
+          />
+        );
+      case "gallery":
+        return (
+          <div
+            key={section.id}
+            className="mb-4 grid grid-cols-5 gap-4 border-y border-gray-300 py-4"
+          >
+            {section.images?.map((image: any, imgIndex: number) => (
+              <div
+                key={imgIndex}
+                className="aspect-square bg-blue-300 rounded-md overflow-hidden relative"
+              >
+                <Image
+                  src={image.media_url}
+                  alt={image.media_alt || ""}
+                  fill
+                  className="object-cover w-full h-auto"
+                />
+              </div>
+            ))}
+          </div>
+        );
+      case "slider":
+        return (
+          <div key={section.id} className="mb-8">
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              navigation
+              pagination={{ clickable: true }}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
+              spaceBetween={16}
+              slidesPerView={1}
+              className="w-full h-[300px] md:h-[400px] lg:h-[500px]"
+            >
+              {section.images?.map((image, index) => (
+                <SwiperSlide key={index}>
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={image.media_url}
+                      alt={image.media_alt || `Slide ${index + 1}`}
+                      fill
+                      className="object-cover rounded-md"
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        );
+      case "summary":
+        return (
+          <div
+            key={section.id}
+            className="mb-4 border-l-4 border-orange pl-4 italic text-lg text-gray-700  my-6 "
+          >
+            {section.content}
+          </div>
+        );
+      case "embedded":
+        return (
+          <div
+            key={section.id}
+            className="mb-4 flex items-center justify-center"
+            dangerouslySetInnerHTML={{ __html: section.embed || "" }}
+          />
+        );
+      case "question":
+        return (
+          <div key={section.id} className="mb-4 text-lg font-medium">
+            Q. {section.question}
+          </div>
+        );
+      case "answer":
+        return (
+          <div key={section.id} className="mb-4 text-lg font-light ml-11">
+            {section.answer}
+          </div>
+        );
+      case "question-answer":
+        return (
+          <div key={section.id}>
+            <div className="mb-4 text-lg font-medium">
+              Q. {section.question}
+            </div>
+            <div className="mb-4 text-lg font-light ml-11">
+              {section.answer}
+            </div>
+          </div>
+        );
+      case "cta":
+        return (
+          section.href && (
+            <Link href={section.href} key={section.id}>
+              <Button className="mb-4">{section.label}</Button>
+            </Link>
+          )
+        );
+      case "attachment":
+        return (
+          <div
+            className="mb-4 border rounded-md p-8 flex items-center gap-4"
+            key={section.id}
+          >
+            <File />
+            {section.media_url && (
+              <Link target="_blank" href={section.media_url}>
+                {section.content}
+              </Link>
+            )}
+          </div>
+        );
+      case "blurb":
+        return (
+          <div key={section.id} className="mb-4 text-lg">
+            {section.content}
+          </div>
+        );
+      case "blockQuote":
+        return (
+          <div key={section.id} className="mb-4 text-2xl italic font-fraunces">
+            {section.content}
+          </div>
+        );
+      case "fact":
+        return (
+          <div key={section.id} className="mb-4 text-lg">
+            {section.content}
+          </div>
+        );
+      case "also-read":
+        return (
+          section.slug && (
+            <div className="mb-4 mt-6" key={section.id}>
+              <SectionHeading
+                title="also read"
+                bgColor="bg-lightOrange"
+                textColor="text-orange"
+                link=""
+              />
+
+              <Link href={section.slug} className="text-4xl font-medium">
+                {section.title}
+              </Link>
+            </div>
+          )
+        );
+      default: {
+        return (
+          // <p
+          //   key={index}
+          //   className="font-normal text-lg text-foreground mb-4 leading-relaxed"
+          //   dangerouslySetInnerHTML={{ __html: section.content }}
+          // />
+          <p key={section.id} className="bg-red-600">
+            Element not found
+          </p>
+        );
+      }
+    }
+  };
   return (
     <div className="max-w-4xl mx-auto font-sans">
-      {/* Main content */}
       <div className="mb-8">
-        {data?.json_content.map((section: any, index: any) => {
-          switch (section.type) {
-            case "paragraph":
-              return (
-                <p
-                  key={index}
-                  className="font-normal text-lg text-foreground mb-4 leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: section.content }}
-                />
-              );
-            case "muted":
-              return (
-                <p
-                  key={index}
-                  className="font-normal text-borderGray text-lg text-muted mb-4 leading-relaxed"
-                >
-                  {section.content}
-                </p>
-              );
-            case "header":
-              return (
-                <p
-                  key={index}
-                  className="font-semibold text-lg uppercase text-foreground mb-4 leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: section.content }}
-                />
-              );
-            case "subheading":
-              return (
-                <h3
-                  key={index}
-                  className="lg:text-2xl font-bold text-gray-900 mb-4 mt-8 "
-                >
-                  {section.content}
-                </h3>
-              );
-            case "quote":
-              return (
-                <blockquote
-                  key={index}
-                  className="border-l-4 border-gray-300 pl-4 italic text-gray-700 my-6"
-                >
-                  {section.content}
-                </blockquote>
-              );
-            case "highlight":
-              return (
-                <div
-                  key={index}
-                  className="text-3xl tracking-wide italic text-gray-700 my-6 font-light leading-relaxed"
-                >
-                  {section.content}
-                </div>
-              );
-            case "section-title":
-              return (
-                // <div key={index} className="bg-orange-100 text-orange-700 py-2 px-4 uppercase text-sm font-semibold tracking-wider mb-4 inline-block">
-                //   {section.content}
-                // </div>
-                <SectionHeading
-                  bgColor="bg-lightOrange"
-                  textColor="text-orange"
-                  link=""
-                  title={section.content}
-                />
-              );
-            case "also-read":
-              return (
-                // <div key={index} className="bg-orange-100 text-orange-700 py-2 px-4 uppercase text-sm font-semibold tracking-wider mb-4 inline-block">
-                //   {section.content}
-                // </div>
-                <SectionHeading
-                  link=""
-                  bgColor="bg-lightOrange"
-                  textColor="text-orange"
-                  title={section.content}
-                />
-              );
-            default:
-              return null;
-          }
+        {data?.json_content.map((section) => {
+          return renderElement(section);
         })}
       </div>
 
@@ -115,41 +237,21 @@ const ArticleContent: React.FC<ArticleContentProps> = ({
             textColor="text-orange"
             link=""
           />
-          <div className="mb-12">
-            <div className="flex items-center pb-4">
-              <ul className="flex items-center gap-3 flex-wrap">
-                {data.topics.map(
-                  (topic: { name: string; slug: string }, index: number) => (
-                    <li
-                      key={index}
-                      className="px-3 py-1 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors"
-                    >
-                      <Link href={`/tag/${topic.slug}`}>{topic.name}</Link>
-                    </li>
-                  )
-                )}
-              </ul>
-            </div>
+          <div className="flex items-center gap-5 flex-wrap mb-6">
+            {data?.topics?.map((topic) => {
+              return (
+                <Link key={topic.url} href={topic.url}>
+                  <p className="text-lg bg-zinc-200 hover:bg-orange hover:text-white px-3 py-1 rounded-md">
+                    {topic.name}
+                  </p>
+                </Link>
+              );
+            })}
           </div>
         </>
       )}
 
-      {/* Author contact
-      <div className="pt-6 mb-12">
-        <div className="flex items-center pb-8">
-          <ul className="flex items-center gap-2">
-          <li className="text-orange">Topics</li>
-            {data?.topics.map((topic: {name: string, slug: string}, index: number) => {
-              return (
-                <li key={index}>
-                  <Link href={`/tag/${topic.slug}`}>{topic.name}</Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </div> */}
-      {data?.authors?.length > 0 && (
+      {(data?.authors ?? []).length > 0 && (
         <div className="pt-6 mb-12">
           {/* <h4 className="text-sm uppercase text-gray-500 mb-4">Author</h4> */}
           <SectionHeading
@@ -158,11 +260,14 @@ const ArticleContent: React.FC<ArticleContentProps> = ({
             textColor="text-orange"
             link=""
           />
+          {/* {JSON.stringify(data?.authors, null, 2)} */}
           <div className="flex items-center pb-8">
-            <p className="text-sm text-foreground font-medium">
-              Connect with our edit team below for queries, followups or
-              contributions:
-            </p>
+            <p
+              className="font-normal text-lg text-foreground leading-relaxed"
+              dangerouslySetInnerHTML={{
+                __html: data?.authors?.[0]?.bio ?? "",
+              }}
+            />
           </div>
           <div className="flex items-center">
             <div className="relative w-12 h-12 rounded-full overflow-hidden mr-4">
@@ -171,7 +276,7 @@ const ArticleContent: React.FC<ArticleContentProps> = ({
                   src={
                     data?.authors?.[0]?.profile_image || "/assets/profile.svg"
                   }
-                  alt={data?.authors?.[0]?.full_name || ""}
+                  alt={data?.authors?.[0]?.name || ""}
                   fill
                   className="object-cover"
                 />
@@ -179,8 +284,10 @@ const ArticleContent: React.FC<ArticleContentProps> = ({
             </div>
             <div>
               <Link href={`/author/${data?.authors?.[0]?.url}`} className="">
-                {data?.authors?.[0]?.full_name ||
-                  data?.authors?.[0]?.first_name ||
+                {data?.authors?.[0]?.name ||
+                  `${data?.authors?.[0]?.first_name || ""} ${
+                    data?.authors?.[0]?.last_name || ""
+                  }` ||
                   "Unknown Author"}
               </Link>
               <div className="flex items-center text-sm text-gray-500">

@@ -175,6 +175,7 @@ export default function EventListingPage( {title, archived=false}: {title: strin
               
             </div>
           </div>
+          
           {/* {JSON.stringify(yearEventCounts)} */}
           {/* Dynamic year sections */}
           {yearEventCounts.length > 0 ? (
@@ -201,7 +202,18 @@ export default function EventListingPage( {title, archived=false}: {title: strin
           ) : (
             <p className="text-inkBlack/40">No events available</p>
           )}
+          {!archived && (
+          <div className="mt-8">
+            <Link
+              href="/events/archived"
+              className="text-inactiveGray font-inter font-semibold text-xs hover:text-gray-600"
+            >
+              VIEW MORE &gt;
+            </Link>
+          </div>
+          )}
         </div>
+        
 
         <EventsListing
           data={{

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import {Inter,Fraunces } from "next/font/google";
+import { Inter, Fraunces } from "next/font/google";
 import { circularStd } from "./fonts";
 import "./globals.css";
 import { LayoutProvider } from "@/context/LayoutContext";
 import Layout from "@/components/Layout";
-
+import { StickyHeaderProvider } from "@/context/HeaderContext";
 
 
 const inter = Inter({
@@ -27,6 +27,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html lang="en">
       <head>
@@ -52,11 +53,7 @@ export default function RootLayout({
         <meta name="twitter:description" content="Infomerics Group" />
         <meta name="twitter:image" content="" />
 
-        <link
-          type="image/x-icon"
-          href="/ico/favicon.ico"
-          rel="shortcut icon"
-        />
+        <link type="image/x-icon" href="/ico/favicon.ico" rel="shortcut icon" />
         <link type="image/x-icon" href="/ico/favicon.ico" rel="icon" />
 
         <link rel="apple-touch-icon" href="/ico/android-chrome-192x192.png" />
@@ -103,7 +100,9 @@ export default function RootLayout({
         className={`${circularStd.className} ${inter.variable} ${fraunces.variable} antialiased`}
       >
         <LayoutProvider>
-          <Layout>{children}</Layout>
+          <StickyHeaderProvider>
+            <Layout>{children}</Layout>
+          </StickyHeaderProvider>
         </LayoutProvider>
       </body>
     </html>

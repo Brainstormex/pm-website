@@ -46,13 +46,13 @@ export const SubCategoryHeader: React.FC<SubCategoryHeaderProps> = ({
         {/* Category Title */}
         <div className="mb-6 md:mb-0">
           <div className="flex items-start gap-x-4 flex-col">
-            <p className="text-lg md:text-lg font-medium uppercase tracking-widest">
+            <p className="text-lg md:text-lg font-medium capitalize tracking-widest">
               {categoryName ? convertSlugToCategory(categoryName) : ""}
             </p>
             {data.subCategories &&
               data.subCategories.length > 0 &&
               pathname?.includes(`/category/${data.category.slug}/`) && (
-                <p className="text-lg md:text-lg font-medium uppercase tracking-widest">
+                <p className="text-lg md:text-lg font-medium capitalize tracking-widest">
                   {categoryName ? convertSlugToCategory(categoryName) : ""}{" "}
                   {data.category.name}
                 </p>
@@ -71,7 +71,7 @@ export const SubCategoryHeader: React.FC<SubCategoryHeaderProps> = ({
             <Link
               key={`link-${index}`}
               href={`/category/${data.category.slug}/${link.slug}`}
-              className={`text-sm md:text-base font-medium transition-colors hover:text-orange-500
+              className={`text-sm md:text-base font-medium transition-colors capitalize hover:text-orange-500
                 ${
                   pathname === `/${data.category.slug}/${link.slug}`
                     ? "text-orange-500"
