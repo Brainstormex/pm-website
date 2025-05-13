@@ -14,14 +14,41 @@ interface PodcastData {
 }
 
 export const fetchPodcasts = async (): Promise<PodcastResponse> => {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/podcast`
-    );
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/podcast`;
+  console.log('Fetching podcasts from:', apiUrl); // Debug log
 
-    return response.json();
+  try {
+    const response = await fetch(apiUrl);
+    
+    if (!response.ok) {
+      console.error('Podcast API error:', {
+        status: response.status,
+        statusText: response.statusText,
+        url: apiUrl
+      });
+      throw new Error(`Podcast API error: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    console.log('Podcast API response:', data); // Debug log
+
+    if (!data.success) {
+      console.error('Podcast API returned error:', data);
+      throw new Error(`Podcast API error: ${data.message}`);
+    }
+
+    if (!data.data || !data.data.podcastEpisodes || !data.data.podcastSeasons) {
+      console.error('Invalid podcast data structure:', data);
+      throw new Error('Invalid podcast data structure received from API');
+    }
+
+    return data;
   } catch (error) {
-    console.error("Error fetching podcasts:", error);
+    console.error("Error fetching podcasts:", {
+      error,
+      apiUrl,
+      env: process.env.NEXT_PUBLIC_API_BASE_URL
+    });
     throw error;
   }
 };
