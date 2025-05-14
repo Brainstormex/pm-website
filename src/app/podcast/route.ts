@@ -1,16 +1,22 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 import { fetchPodcasts } from '@/services/podcastService';
 import { PodcastSeason } from '@/types/common';
 
-export async function GET() {
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+export async function GET(request: NextRequest) {
     const { data } = await fetchPodcasts();
     const { podcastSeasons } = data;
+    const url = request.nextUrl;
 
     // Find the latest active season
     const latestSeason = podcastSeasons.find((season: PodcastSeason) => season);
     if (latestSeason) {
-        return NextResponse.redirect(new URL(`/podcast/${latestSeason.id}`));
+        return NextResponse.redirect(new URL(`/podcast/${latestSeason.id}`, url.origin));
     }
-    // Fallback to first season if no active season is found
-    return NextResponse.redirect(new URL(`/podcast/${podcastSeasons[0].id}`));
+
+    // Just use the first season since backend provides them in the correct order
+    return NextResponse.redirect(new URL(`/podcast/${podcastSeasons[0].id}`, url.origin));
 } 
