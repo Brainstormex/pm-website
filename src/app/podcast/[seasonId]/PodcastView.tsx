@@ -18,9 +18,9 @@ export const PodcastView = async ({ seasonId }: { seasonId: string })  => {
     (episode: PodcastEpisode) => episode.season_id === seasonId
   );
 
-  if (!seasonEpisodes || seasonEpisodes.length === 0) {
-    return <div className="text-center py-10">No episodes found for this season</div>;
-  }
+  // if (!seasonEpisodes || seasonEpisodes.length === 0) {
+  //   return <div className="text-center py-10">No episodes found for this season</div>;
+  // }
 
   return (
     <div className="mx-auto flex-col lg:flex-row max-w-7xl pt-4 pb-20 flex lg:px-0 px-6 justify-between gap-x-14">
@@ -33,10 +33,16 @@ export const PodcastView = async ({ seasonId }: { seasonId: string })  => {
           }))}
         />
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:w-2/3 w-full">
-        {seasonEpisodes.map((episode) => (
-          <PodcastCard key={episode.id} episode={episode} />
-        ))}
+      <div className="lg:w-2/3 w-full">
+        {!seasonEpisodes || seasonEpisodes.length === 0 ? (
+          <div className="text-center py-10">No episodes found for this season</div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {seasonEpisodes.map((episode) => (
+              <PodcastCard key={episode.id} episode={episode} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
